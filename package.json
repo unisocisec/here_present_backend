@@ -1,0 +1,19 @@
+{
+  "name": "here_presente_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unisocisec/here_presente_backend.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unisocisec/here_presente_backend/issues"
+  },
+  "homepage": "https://github.com/unisocisec/here_presente_backend#readme"
+}
