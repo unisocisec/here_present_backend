@@ -3,7 +3,24 @@
 class Teacher < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  include Devise::JWT::RevocationStrategies::Allowlist
 
-  validates :name, presence: true
+  has_many :allowlisted_jwts
+
+  devise :database_authenticatable,
+         :encryptable,
+         :registerable,
+         :recoverable,
+         :confirmable,
+         :validatable,
+         :trackable,
+         :jwt_authenticatable,
+         jwt_revocation_strategy: self
+  validates :first_name, :last_name, presence: true
+
+  def password_salt
+    'no salt'
+  end
+
+  def password_salt=(new_salt); end
 end

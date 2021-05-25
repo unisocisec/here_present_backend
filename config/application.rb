@@ -38,5 +38,18 @@ module HerePresentApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    ENV.update YAML.load_file('config/application.yml')[Rails.env] unless Rails.env.production?
+
+    # if Rails.env.development?
+    #   config.before_configuration do
+    #     env_file = File.join(Rails.root, 'config', 'local_env.yml')
+    #     if File.exist?(env_file)
+    #       YAML.safe_load(File.open(env_file)).each do |key, value|
+    #         ENV[key.to_s] = value
+    #       end
+    #     end
+    #   end
+    # end
   end
 end
