@@ -7,6 +7,14 @@ module Api
 
     private
 
+    def respond_with(resource, _opts = {})
+      render json: resource
+    end
+
+    def respond_to_on_destroy
+      head :ok
+    end
+
     def sign_in_params
       params.permit(:email, :password)
     end

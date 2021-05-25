@@ -13,7 +13,7 @@ Rails.application.routes.draw do
                           unlocks: 'unlocks',
                           passwords: 'api/passwords',
                           sessions: 'api/sessions',
-                          registrations: 'registrations'
+                          registrations: 'api/registrations'
                         }
 
   post 'auth/code' => 'api/code_validations#create'
