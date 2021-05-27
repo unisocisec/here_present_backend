@@ -11,7 +11,16 @@ default: &default
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  port: 3306
+  adapter: mysql2
+  database: here_present
+  host: 127.0.0.1
+  port: 3301
+  username: username
+  password: password
+  encoding: utf8
+  reconnect: false
+  pool: 5
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
