@@ -21,7 +21,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :classrooms
+      resources :call_lists
       resources :teachers
+      resources :student_answers
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
