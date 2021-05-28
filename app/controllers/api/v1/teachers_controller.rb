@@ -15,7 +15,7 @@ module Api
         if @teacher.present?
           render json: @teacher
         else
-          render json: { message: "Não foi possível identeficar usuario com esse ID" }, status: :bad_request
+          render json: { message: 'Não foi possível identeficar usuario com esse ID' }, status: :bad_request
         end
       end
 
@@ -40,9 +40,9 @@ module Api
       def destroy
         @teacher = Teacher.find_by_id(params[:id])
         if @teacher.destroy
-          render json: { message: "Exclusão com sucesso" }, status: :ok
+          render json: { message: 'Exclusão com sucesso' }, status: :ok
         else
-          render json: { message: "Exclusão com error" }, status: :bad_request
+          render json: { message: 'Exclusão com error' }, status: :bad_request
         end
       end
 

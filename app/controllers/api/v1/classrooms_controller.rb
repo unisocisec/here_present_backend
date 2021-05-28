@@ -13,7 +13,7 @@ module Api
         if @classroom.present?
           render json: @classroom
         else
-          render json: { message: "Não foi possível identificar Turma com esse ID" }, status: :bad_request
+          render json: { message: 'Não foi possível identificar Turma com esse ID' }, status: :bad_request
         end
       end
 
@@ -38,9 +38,9 @@ module Api
       def destroy
         @classroom = Classroom.find_by_id(params[:id])
         if @classroom.destroy
-          render json: { message: "Exclusão com sucesso" }, status: :ok
+          render json: { message: 'Exclusão com sucesso' }, status: :ok
         else
-          render json: { message: "Exclusão com error" }, status: :bad_request
+          render json: { message: 'Exclusão com error' }, status: :bad_request
         end
       end
 

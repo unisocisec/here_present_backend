@@ -9,14 +9,14 @@ class StudentAnswer < ApplicationRecord
   after_save :set_answer_correct
 
   def was_not_edited?
-    !self.edited
+    !edited
   end
 
   def set_edited
-    self.update_column("edited", true)
+    update_column('edited', true)
   end
 
   def set_answer_correct
-    self.update_column("answer_correct", call_list&.confirmation_code == self.confirmation_code)
+    update_column('answer_correct', call_list&.confirmation_code == confirmation_code)
   end
 end
