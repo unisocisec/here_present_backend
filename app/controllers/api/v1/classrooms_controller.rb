@@ -3,7 +3,7 @@
 module Api
   module V1
     class ClassroomsController < ApplicationController
-      before_action :search_classroom_for_id, only: [:show, :update, :teachers_in_classroom, :destroy]
+      before_action :search_classroom_for_id, only: %i[show update teachers_in_classroom destroy]
 
       def index
         @classrooms = Classroom.all
@@ -57,7 +57,6 @@ module Api
       end
 
       private
-
 
       def search_classroom_for_id
         @classroom = Classroom.find_by_id(params[:id])

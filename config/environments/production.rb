@@ -118,17 +118,17 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: 'example.herokuapp.com', protocol: 'https' }
   config.action_mailer.smtp_settings = {
-    address: ENV["MAILER_ADDRESS"],
-    port: ENV["MAILER_PORT"],
-    authentication: "plain",
+    address: ENV['MAILER_ADDRESS'],
+    port: ENV['MAILER_PORT'],
+    authentication: 'plain',
     enable_starttls_auto: true,
-    user_name: ENV["MAILER_USER_NAME"],
-    password: ENV["MAILER_PASSWORD"],
-    domain: ENV["MAILER_DOMAIN"],
-    openssl_verify_mode: "none",
+    user_name: ENV['MAILER_USER_NAME'],
+    password: ENV['MAILER_PASSWORD'],
+    domain: ENV['MAILER_DOMAIN'],
+    openssl_verify_mode: 'none'
   }
 
   # websocket config
-  config.web_socket_server_url = "wss://example.herokuapp.com/api/cable"
+  config.web_socket_server_url = 'wss://example.herokuapp.com/api/cable'
   config.action_cable.allowed_request_origins = %w[https://example.cookiecode.com.br https://example-ce9c3.web.app/]
 end

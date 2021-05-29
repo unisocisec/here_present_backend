@@ -25,7 +25,6 @@ module HerePresentApi
   class Application < Rails::Application
     config.load_defaults 6.1
 
-
     config.api_only = true
 
     ENV.update YAML.load_file('config/application.yml')[Rails.env] unless Rails.env.production?

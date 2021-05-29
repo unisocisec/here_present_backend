@@ -3,7 +3,7 @@
 module Api
   module V1
     class TeachersController < ApplicationController
-      before_action :search_teacher_for_id, only: [:show, :update, :my_classrooms, :destroy]
+      before_action :search_teacher_for_id, only: %i[show update my_classrooms destroy]
 
       def index
         @teachers = Teacher.all
