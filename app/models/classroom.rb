@@ -5,6 +5,9 @@ class Classroom < ApplicationRecord
   VESPERTINE = 1
   NIGHTLY = 2
 
+  has_many :teacher_classrooms
+  has_many :teachers, through: :teacher_classrooms
+
   enum shift: %i[DIURNAL VESPERTINE NIGHTLY]
   OPTIONS_WEEK_DAY = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].freeze
   validates :name, presence: true

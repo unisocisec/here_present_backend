@@ -112,4 +112,23 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'example.herokuapp.com', protocol: 'https' }
+  config.action_mailer.smtp_settings = {
+    address: ENV["MAILER_ADDRESS"],
+    port: ENV["MAILER_PORT"],
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["MAILER_USER_NAME"],
+    password: ENV["MAILER_PASSWORD"],
+    domain: ENV["MAILER_DOMAIN"],
+    openssl_verify_mode: "none",
+  }
+
+  # websocket config
+  config.web_socket_server_url = "wss://example.herokuapp.com/api/cable"
+  config.action_cable.allowed_request_origins = %w[https://example.cookiecode.com.br https://example-ce9c3.web.app/]
 end

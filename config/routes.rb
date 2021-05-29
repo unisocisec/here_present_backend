@@ -21,9 +21,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :classrooms
+      resources :classrooms do
+        get :teachers_in_classroom, on: :member
+        post :add_teacher_in_classroom, on: :member
+      end
       resources :call_lists
-      resources :teachers
+      resources :teachers do
+        get :my_classrooms, on: :member
+      end
       resources :student_answers
     end
   end
