@@ -22,8 +22,11 @@ gem 'puma', '~> 5.0'
 gem 'devise'
 gem 'devise-argon2'
 gem 'devise-encryptable'
+gem 'devise-i18n'
 gem 'devise-jwt'
 gem 'mysql2'
+
+gem 'faker'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
