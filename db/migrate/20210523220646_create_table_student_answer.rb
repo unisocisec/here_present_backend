@@ -7,6 +7,7 @@ class CreateTableStudentAnswer < ActiveRecord::Migration[6.1]
       t.string :email, null: false
       t.string :confirmation_code, null: false
       t.boolean :edited, default: false
+      t.boolean :answer_correct, default: false
 
       t.references :call_list
       t.timestamps

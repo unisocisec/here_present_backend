@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20_210_524_233_313) do
     t.string 'email', null: false
     t.string 'confirmation_code', null: false
     t.boolean 'edited', default: false
+    t.boolean 'answer_correct', default: false
     t.bigint 'call_list_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false

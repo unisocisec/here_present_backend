@@ -23,33 +23,20 @@ Bundler.require(*Rails.groups)
 
 module HerePresentApi
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
-
-    # Only loads a smaller set of middleware suitable for API only apps.
-    # Middleware like session, flash, cookies can be added back manually.
-    # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
     ENV.update YAML.load_file('config/application.yml')[Rails.env] unless Rails.env.production?
 
-    # if Rails.env.development?
-    #   config.before_configuration do
-    #     env_file = File.join(Rails.root, 'config', 'local_env.yml')
-    #     if File.exist?(env_file)
-    #       YAML.safe_load(File.open(env_file)).each do |key, value|
-    #         ENV[key.to_s] = value
-    #       end
-    #     end
-    #   end
-    # end
+    config.time_zone = 'Brasilia'
+
+    config.i18n.enforce_available_locales = false
+    config.i18n.available_locales = ['pt-BR']
+    config.i18n.default_locale = :'pt-BR'
+
+    config.navigational_formats = []
+
+    config.middleware.use Rack::Attack
   end
 end

@@ -1,0 +1,54 @@
+DATABASE: &database
+  DB_USERNAME: DB_USERNAME
+  DB_PASSWORD: DB_USERNAME
+  DB_HOST: DB_HOST
+  DB_DATABASE: DB_DATABASE
+
+MAILER: &mailer
+  MAILER_ADDRESS: smtp.gmail.com
+  MAILER_PORT: '587'
+  MAILER_USER_NAME:
+  MAILER_PASSWORD:
+  MAILER_DOMAIN: gmail.com
+
+AWS: &aws
+  AWS_PROVIDER: AWS
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  AWS_REGION:
+  AWS_BUCKET:
+  AWS_S3_DIRECTORY:
+
+REDIS: &redis
+  REDIS_HOST:
+  REDIS_USER:
+  REDIS_PORT:
+  REDIS_PASSWORD:
+  REDIS_URI:
+
+development:
+  <<: *database
+  <<: *mailer
+  <<: *aws
+  CONFIRM_URL: ""
+  BUGSNAG_KEY: ""
+  JWT_SECRET: 62a2aaa987046dba18b6a9ba46ba73abfeaac227793b2f9644228c008a97e97fc64d45e4aae861f2f2f603506e9e107affdd4535f29cd0a433e8ab58a5280dc4
+
+test:
+  <<: *database
+  <<: *mailer
+  <<: *aws
+  CONFIRM_URL: ""
+  BUGSNAG_KEY: ""
+  JWT_SECRET: 62a2aaa987046dba18b6a9ba46ba73abfeaac227793b2f9644228c008a97e97fc64d45e4aae861f2f2f603506e9e107affdd4535f29cd0a433e8ab58a5280dc4
+
+production:
+  <<: *database
+  <<: *aws
+  <<: *redis
+  MAILER_HOST: HerePresent.com.br
+  MAILER_PORT: '80'
+  SENTRY_DSN: ''
+  CONFIRM_URL: ""
+  BUGSNAG_KEY: ""
+  JWT_SECRET: 62a2aaa987046dba18b6a9ba46ba73abfeaac227793b2f9644228c008a97e97fc64d45e4aae861f2f2f603506e9e107affdd4535f29cd0a433e8ab58a5280dc4

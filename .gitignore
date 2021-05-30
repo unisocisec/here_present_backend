@@ -10,6 +10,7 @@ capybara-*.html
 *.orig
 rerun.txt
 pickle-email-*.html
+notes.txt
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -22,6 +23,7 @@ config/initializers/secret_token.rb
 config/master.key
 config/database.yml
 config/local_env.yml
+config/application.yml
 
 # Only include if you have production secrets in this file, which is no longer a Rails default
 # config/secrets.yml
