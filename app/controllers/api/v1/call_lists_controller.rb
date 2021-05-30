@@ -3,18 +3,15 @@
 module Api
   module V1
     class CallListsController < ApplicationController
+      before_action :search_call_list_for_id, except: %w[index create]
+
       def index
         @call_lists = CallList.all
         render json: @call_lists
       end
 
       def show
-        @call_list = CallList.find_by_id(params[:id])
-        if @call_list.present?
-          render json: @call_list
-        else
-          render json: { message: 'Não foi possível identificar Turma com esse ID' }, status: :bad_request
-        end
+        render json: @call_list
       end
 
       def create
@@ -27,7 +24,6 @@ module Api
       end
 
       def update
-        @call_list = CallList.find_by_id(params[:id])
         if @call_list.update(update_params)
           render json: @call_list
         else
@@ -36,7 +32,6 @@ module Api
       end
 
       def destroy
-        @call_list = CallList.find_by_id(params[:id])
         if @call_list.destroy
           render json: { message: 'Exclusão com sucesso' }, status: :ok
         else
@@ -44,7 +39,29 @@ module Api
         end
       end
 
+      def call_list_teachers
+        @teachers = @call_list.teachers
+        render json: { teachers: @teachers }
+      end
+
+      def call_list_classroom
+        @classroom = @call_list.classroom
+        render json: { classroom: @classroom }
+      end
+
+      def call_list_student_answers
+        @student_answers = @call_list.student_answers
+        render json: { student_answers: @student_answers }
+      end
+
       private
+
+      def search_call_list_for_id
+        @call_list = CallList.find_by_id(params[:id])
+        return render json: { message: 'Não foi possível encontrar a Chamada' }, status: :bad_request if @call_list.blank?
+
+        @call_list
+      end
 
       def create_params
         params.permit(

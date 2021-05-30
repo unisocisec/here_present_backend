@@ -3,7 +3,7 @@
 module Api
   module V1
     class ClassroomsController < ApplicationController
-      before_action :search_classroom_for_id, only: %i[show update teachers_in_classroom destroy]
+      before_action :search_classroom_for_id, except: %w[index create]
 
       def index
         @classrooms = Classroom.all
@@ -43,17 +43,27 @@ module Api
         end
       end
 
-      def teachers_in_classroom
-        @teachers = @classroom.teachers
-        render json: { teachers: @teachers }
-      end
-
       def destroy
         if @classroom.destroy
           render json: { message: 'Exclusão com sucesso', classroom: @classroom }, status: :ok
         else
           render json: { message: 'Exclusão com error' }, status: :bad_request
         end
+      end
+
+      def classroom_teachers
+        @teachers = @classroom.teachers
+        render json: { teachers: @teachers }
+      end
+
+      def classroom_call_lists
+        @call_lists = @classroom.call_lists
+        render json: { call_lists: @call_lists }
+      end
+
+      def classroom_student_answers
+        @student_answers = @classroom.student_answers
+        render json: { student_answers: @student_answers }
       end
 
       private

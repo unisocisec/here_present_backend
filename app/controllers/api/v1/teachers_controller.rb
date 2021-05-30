@@ -3,6 +3,7 @@
 module Api
   module V1
     class TeachersController < ApplicationController
+      skip_before_action :authenticate_teacher, only: [:create]
       before_action :search_teacher_for_id, only: %i[show update my_classrooms destroy]
 
       def index
@@ -31,17 +32,27 @@ module Api
         end
       end
 
-      def my_classrooms
-        @my_classrooms = @teacher.classrooms
-        render json: { classrooms: @my_classrooms }, status: :ok
-      end
-
       def destroy
         if @teacher.destroy
           render json: { message: 'Exclusão com sucesso' }, status: :ok
         else
           render json: { message: 'Exclusão com error' }, status: :bad_request
         end
+      end
+
+      def teacher_classrooms
+        @classrooms = @teacher.classrooms
+        render json: { classrooms: @classrooms }, status: :ok
+      end
+
+      def teacher_call_lists
+        @call_lists = @teacher.call_lists
+        render json: { call_lists: @call_lists }, status: :ok
+      end
+
+      def teacher_student_answers
+        @student_answers = @teacher.student_answers
+        render json: { student_answers: @student_answers }, status: :ok
       end
 
       private

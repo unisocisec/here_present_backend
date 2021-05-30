@@ -3,6 +3,9 @@
 module Api
   module V1
     class StudentAnswersController < ApplicationController
+      skip_before_action :authenticate_teacher, only: [:create]
+      before_action :search_student_answer_for_id, except: %w[index create]
+
       def index
         @student_answers = StudentAnswer.all
         render json: @student_answers
@@ -44,7 +47,29 @@ module Api
         end
       end
 
+      def student_answer_teachers
+        @teachers = @student_answer.teachers
+        render json: { teachers: @teachers }, status: :ok
+      end
+
+      def student_answer_classroom
+        @classroom = @student_answer.classroom
+        render json: { classroom: @classroom }, status: :ok
+      end
+
+      def student_answer_call_list
+        @call_list = @student_answer.call_list
+        render json: { call_list: @call_list }, status: :ok
+      end
+
       private
+
+      def search_student_answer_for_id
+        @student_answer = StudentAnswer.find_by_id(params[:id])
+        return render json: { message: 'Não foi possível encontrar a Estudante' }, status: :bad_request if @student_answer.blank?
+
+        @student_answer
+      end
 
       def create_params
         params.permit(

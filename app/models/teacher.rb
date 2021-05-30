@@ -7,6 +7,8 @@ class Teacher < ApplicationRecord
 
   has_many :teacher_classrooms
   has_many :classrooms, through: :teacher_classrooms
+  has_many :call_lists, through: :classrooms
+  has_many :student_answers, through: :call_lists
   has_many :allowlisted_jwts
 
   devise :database_authenticatable,

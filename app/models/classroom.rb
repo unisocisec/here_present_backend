@@ -7,6 +7,8 @@ class Classroom < ApplicationRecord
 
   has_many :teacher_classrooms
   has_many :teachers, through: :teacher_classrooms
+  has_many :call_lists
+  has_many :student_answers, through: :call_lists
 
   enum shift: %i[DIURNAL VESPERTINE NIGHTLY]
   OPTIONS_WEEK_DAY = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].freeze

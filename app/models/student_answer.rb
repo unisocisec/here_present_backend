@@ -2,6 +2,9 @@
 
 class StudentAnswer < ApplicationRecord
   belongs_to :call_list
+  has_one :classroom, through: :call_list
+  has_many :teacher_classrooms, through: :classroom
+  has_many :teachers, through: :teacher_classrooms
 
   validates :full_name, :email, :call_list_id, presence: true
 
