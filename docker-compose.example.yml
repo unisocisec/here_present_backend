@@ -1,0 +1,40 @@
+version: "3.1"
+
+services:
+
+  db:
+    image: mariadb
+    restart: always
+    container_name: here_present_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+
+  adminer:
+    image: adminer
+    container_name: here_present_adminer
+    ports:
+      - 8080:8080
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    container_name: here_present_mailcatcher
+    tty: true
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+  api:
+    build: .
+    container_name: here_present_api
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/var/www
+      - .bundle:/usr/local/bundle
+      - .coverage:/var/www/.coverage
+    stdin_open: true
+    tty: true
+    links:
+      - db
+    depends_on:
+      - db

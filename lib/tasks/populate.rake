@@ -10,7 +10,7 @@ namespace :db do
     Faker::Config.locale = 'pt-BR'
     puts 'Create Teachers'
     teacher = Teacher.create_with(
-      password: 'password1234', first_name: 'user', last_name: 'default', confirm_at: Time.now
+      password: 'password1234', first_name: 'user', last_name: 'default'
     ).where(
       email: 'user@default.com'
     ).first_or_create

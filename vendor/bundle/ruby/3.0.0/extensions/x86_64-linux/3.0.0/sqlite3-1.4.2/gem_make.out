@@ -1,5 +1,5 @@
-current directory: /home/leandro/here_present_backend/vendor/bundle/ruby/3.0.0/gems/sqlite3-1.4.2/ext/sqlite3
-/usr/share/rvm/rubies/ruby-3.0.0/bin/ruby -I /usr/share/rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0 -r ./siteconf20210520-106039-x9z7hh.rb extconf.rb
+current directory: /var/www/vendor/bundle/ruby/3.0.0/gems/sqlite3-1.4.2/ext/sqlite3
+/usr/local/bin/ruby -I /usr/local/lib/ruby/3.0.0 -r ./siteconf20210601-4934-vgyt9m.rb extconf.rb
 checking for sqlite3.h... yes
 checking for pthread_create() in -lpthread... yes
 checking for -ldl... yes
@@ -17,59 +17,51 @@ checking for sqlite3_int64 in sqlite3.h... yes
 checking for sqlite3_uint64 in sqlite3.h... yes
 creating Makefile
 
-current directory: /home/leandro/here_present_backend/vendor/bundle/ruby/3.0.0/gems/sqlite3-1.4.2/ext/sqlite3
+current directory: /var/www/vendor/bundle/ruby/3.0.0/gems/sqlite3-1.4.2/ext/sqlite3
 make "DESTDIR=" clean
 
-current directory: /home/leandro/here_present_backend/vendor/bundle/ruby/3.0.0/gems/sqlite3-1.4.2/ext/sqlite3
+current directory: /var/www/vendor/bundle/ruby/3.0.0/gems/sqlite3-1.4.2/ext/sqlite3
 make "DESTDIR="
 compiling aggregator.c
 compiling backup.c
 compiling database.c
 database.c: In function ‘rb_sqlite3_open_v2’:
 database.c:38:9: warning: unused variable ‘flags’ [-Wunused-variable]
-   38 |   VALUE flags;
-      |         ^~~~~
+   VALUE flags;
+         ^~~~~
 database.c: In function ‘exec_batch’:
 database.c:726:57: warning: passing argument 3 of ‘sqlite3_exec’ from incompatible pointer type [-Wincompatible-pointer-types]
-  726 |     status = sqlite3_exec(ctx->db, StringValuePtr(sql), hash_callback_function, callback_ary, &errMsg);
-      |                                                         ^~~~~~~~~~~~~~~~~~~~~~
-      |                                                         |
-      |                                                         int (*)(VALUE,  int,  char **, char **) {aka int (*)(long unsigned int,  int,  char **, char **)}
+     status = sqlite3_exec(ctx->db, StringValuePtr(sql), hash_callback_function, callback_ary, &errMsg);
+                                                         ^~~~~~~~~~~~~~~~~~~~~~
 In file included from ./sqlite3_ruby.h:25,
                  from database.c:1:
-/usr/include/sqlite3.h:409:9: note: expected ‘int (*)(void *, int,  char **, char **)’ but argument is of type ‘int (*)(VALUE,  int,  char **, char **)’ {aka ‘int (*)(long unsigned int,  int,  char **, char **)’}
-  409 |   int (*callback)(void*,int,char**,char**),  /* Callback function */
-      |   ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/sqlite3.h:406:9: note: expected ‘int (*)(void *, int,  char **, char **)’ but argument is of type ‘int (*)(VALUE,  int,  char **, char **)’ {aka ‘int (*)(long unsigned int,  int,  char **, char **)’}
+   int (*callback)(void*,int,char**,char**),  /* Callback function */
+   ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 database.c:726:81: warning: passing argument 4 of ‘sqlite3_exec’ makes pointer from integer without a cast [-Wint-conversion]
-  726 |     status = sqlite3_exec(ctx->db, StringValuePtr(sql), hash_callback_function, callback_ary, &errMsg);
-      |                                                                                 ^~~~~~~~~~~~
-      |                                                                                 |
-      |                                                                                 VALUE {aka long unsigned int}
+     status = sqlite3_exec(ctx->db, StringValuePtr(sql), hash_callback_function, callback_ary, &errMsg);
+                                                                                 ^~~~~~~~~~~~
 In file included from ./sqlite3_ruby.h:25,
                  from database.c:1:
-/usr/include/sqlite3.h:410:3: note: expected ‘void *’ but argument is of type ‘VALUE’ {aka ‘long unsigned int’}
-  410 |   void *,                                    /* 1st argument to callback */
-      |   ^~~~~~
+/usr/include/sqlite3.h:407:3: note: expected ‘void *’ but argument is of type ‘VALUE’ {aka ‘long unsigned int’}
+   void *,                                    /* 1st argument to callback */
+   ^~~~~~
 database.c:728:57: warning: passing argument 3 of ‘sqlite3_exec’ from incompatible pointer type [-Wincompatible-pointer-types]
-  728 |     status = sqlite3_exec(ctx->db, StringValuePtr(sql), regular_callback_function, callback_ary, &errMsg);
-      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~
-      |                                                         |
-      |                                                         int (*)(VALUE,  int,  char **, char **) {aka int (*)(long unsigned int,  int,  char **, char **)}
+     status = sqlite3_exec(ctx->db, StringValuePtr(sql), regular_callback_function, callback_ary, &errMsg);
+                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~
 In file included from ./sqlite3_ruby.h:25,
                  from database.c:1:
-/usr/include/sqlite3.h:409:9: note: expected ‘int (*)(void *, int,  char **, char **)’ but argument is of type ‘int (*)(VALUE,  int,  char **, char **)’ {aka ‘int (*)(long unsigned int,  int,  char **, char **)’}
-  409 |   int (*callback)(void*,int,char**,char**),  /* Callback function */
-      |   ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/sqlite3.h:406:9: note: expected ‘int (*)(void *, int,  char **, char **)’ but argument is of type ‘int (*)(VALUE,  int,  char **, char **)’ {aka ‘int (*)(long unsigned int,  int,  char **, char **)’}
+   int (*callback)(void*,int,char**,char**),  /* Callback function */
+   ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 database.c:728:84: warning: passing argument 4 of ‘sqlite3_exec’ makes pointer from integer without a cast [-Wint-conversion]
-  728 |     status = sqlite3_exec(ctx->db, StringValuePtr(sql), regular_callback_function, callback_ary, &errMsg);
-      |                                                                                    ^~~~~~~~~~~~
-      |                                                                                    |
-      |                                                                                    VALUE {aka long unsigned int}
+     status = sqlite3_exec(ctx->db, StringValuePtr(sql), regular_callback_function, callback_ary, &errMsg);
+                                                                                    ^~~~~~~~~~~~
 In file included from ./sqlite3_ruby.h:25,
                  from database.c:1:
-/usr/include/sqlite3.h:410:3: note: expected ‘void *’ but argument is of type ‘VALUE’ {aka ‘long unsigned int’}
-  410 |   void *,                                    /* 1st argument to callback */
-      |   ^~~~~~
+/usr/include/sqlite3.h:407:3: note: expected ‘void *’ but argument is of type ‘VALUE’ {aka ‘long unsigned int’}
+   void *,                                    /* 1st argument to callback */
+   ^~~~~~
 database.c: At top level:
 cc1: warning: unrecognized command line option ‘-Wno-self-assign’
 cc1: warning: unrecognized command line option ‘-Wno-parentheses-equality’
@@ -79,6 +71,6 @@ compiling sqlite3.c
 compiling statement.c
 linking shared-object sqlite3/sqlite3_native.so
 
-current directory: /home/leandro/here_present_backend/vendor/bundle/ruby/3.0.0/gems/sqlite3-1.4.2/ext/sqlite3
+current directory: /var/www/vendor/bundle/ruby/3.0.0/gems/sqlite3-1.4.2/ext/sqlite3
 make "DESTDIR=" install
-/usr/bin/install -m 0755 sqlite3_native.so ./.gem.20210520-106039-ckj4s0/sqlite3
+/usr/bin/install -c -m 0755 sqlite3_native.so ./.gem.20210601-4934-3a9boa/sqlite3
