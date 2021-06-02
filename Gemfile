@@ -28,9 +28,13 @@ gem 'mysql2'
 
 gem 'faker'
 
+gem 'api-pagination'
+gem 'will_paginate'
+
 # Reduces boot times through caching; required in config/boot.rb
-gem 'ffi'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'ffi'
+gem 'csv'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-attack'

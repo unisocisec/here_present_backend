@@ -3,7 +3,7 @@
 module Api
   module V1
     class TeachersController < ApplicationController
-      skip_before_action :authenticate_teacher, only: [:create]
+      skip_before_action :authenticate_teacher!, only: [:create]
       before_action :search_teacher_for_id, only: %i[show update my_classrooms destroy]
 
       def index
@@ -42,16 +42,31 @@ module Api
 
       def teacher_classrooms
         @classrooms = @teacher.classrooms
-        render json: { classrooms: @classrooms }, status: :ok
+        paginate json: @classrooms, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def teacher_call_lists
         @call_lists = @teacher.call_lists
-        render json: { call_lists: @call_lists }, status: :ok
+        paginate json: @call_lists, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def teacher_student_answers
         @student_answers = @teacher.student_answers
+        paginate json: @student_answers, per_page: PAGINATE_PER_PAGE, status: :ok
+      end
+
+      def export_teachers
+        @teachers = Teacher.all
+
+        # byebug
+        # file_name = "export_teachers"
+        # path = FileUtils.mkdir_p "public/uploads/exports/#{Time.now.strftime('%Y-%d-%m')}"
+        # file = File.open(("#{path.first}/#{Time.now.strftime('%Y-%d-%m')}-#{file_name}#{Time.now.to_i}-#{SecureRandom.uuid}.csv").to_s, "wb:iso-8859-15")
+        # file.binmode
+        # file.write(@teachers.to_csv)
+        # file.close
+        # file.path
+
         render json: { student_answers: @student_answers }, status: :ok
       end
 

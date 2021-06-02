@@ -6,7 +6,7 @@ module Api
       before_action :search_classroom_for_id, except: %w[index create]
 
       def index
-        @classrooms = Classroom.all
+        @classrooms = Classroom.joins(:teachers).where(teachers: { id: current_teacher.id })
         render json: { classrooms: @classrooms }
       end
 
@@ -53,23 +53,23 @@ module Api
 
       def classroom_teachers
         @teachers = @classroom.teachers
-        render json: { teachers: @teachers }
+        paginate json: @teachers, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def classroom_call_lists
         @call_lists = @classroom.call_lists
-        render json: { call_lists: @call_lists }
+        paginate json: @call_lists, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def classroom_student_answers
         @student_answers = @classroom.student_answers
-        render json: { student_answers: @student_answers }
+        paginate json: @student_answers, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       private
 
       def search_classroom_for_id
-        @classroom = Classroom.find_by_id(params[:id])
+        @classroom = Classroom.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first
         return render json: { message: 'Não foi possível encontrar a Turma' }, status: :bad_request if @classroom.blank?
 
         @classroom

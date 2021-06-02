@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         get :teacher_classrooms, on: :member
         get :teacher_call_lists, on: :member
         get :teacher_student_answers, on: :member
+        get :export_teachers, on: :member
       end
       resources :classrooms do
         post :add_teacher_in_classroom, on: :member
