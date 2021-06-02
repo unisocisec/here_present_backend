@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     postgresql-client \
     default-mysql-client \
     default-libmysqlclient-dev \
+    libmariadb-client-lgpl-dev \
+    libmariadb-client-lgpl-dev-compat \
+    libmariadbclient-dev \
     libgdbm-dev \
     libmagic-dev \
     imagemagick \
@@ -52,7 +55,7 @@ RUN echo "gem: --no-document" > ~/.gemrc
 RUN gem install bundler
 
 # RAILS
-RUN gem update --system \
+RUN sudo gem update --system \
   && gem install bundler \
   && gem install rails
 

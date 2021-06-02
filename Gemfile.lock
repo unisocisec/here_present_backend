@@ -278,6 +278,7 @@ DEPENDENCIES
   ffi
   listen (~> 3.3)
   mailcatcher
+  minitest
   mysql2
   puma (~> 5.0)
   rack-attack
