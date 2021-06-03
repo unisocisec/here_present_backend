@@ -55,22 +55,26 @@ module Api
         paginate json: @student_answers, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
-      def export_teachers
-        @teachers = Teacher.all
+      def export_classrooms_in_teacher
+        response = export_service.export_classrooms(classrooms: @teacher.classrooms)
+        render json: { message: response[:message], path: response[:path], teacher: @teacher }, status: response[:status]
+      end
 
-        # byebug
-        # file_name = "export_teachers"
-        # path = FileUtils.mkdir_p "public/uploads/exports/#{Time.now.strftime('%Y-%d-%m')}"
-        # file = File.open(("#{path.first}/#{Time.now.strftime('%Y-%d-%m')}-#{file_name}#{Time.now.to_i}-#{SecureRandom.uuid}.csv").to_s, "wb:iso-8859-15")
-        # file.binmode
-        # file.write(@teachers.to_csv)
-        # file.close
-        # file.path
+      def export_call_lists_in_teacher
+        response = export_service.export_call_lists_in_teacher(call_lists: @teacher.call_list)
+        render json: { message: response[:message], path: response[:path], teacher: @teacher }, status: response[:status]
+      end
 
-        render json: { student_answers: @student_answers }, status: :ok
+      def export_student_answers_in_teacher
+        response = export_service.export_student_answers(student_answers: @teacher.student_answers)
+        render json: { message: response[:message], path: response[:path], teacher: @teacher }, status: response[:status]
       end
 
       private
+
+      def export_service
+        @export_service ||= ExportService.new
+      end
 
       def create_params
         params.permit(

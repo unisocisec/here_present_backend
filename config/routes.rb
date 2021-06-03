@@ -25,18 +25,25 @@ Rails.application.routes.draw do
         get :teacher_classrooms, on: :member
         get :teacher_call_lists, on: :member
         get :teacher_student_answers, on: :member
-        get :export_teachers, on: :member
+        get :export_classrooms_in_teacher, on: :member
+        get :export_call_lists_in_teacher, on: :member
+        get :export_student_answers_in_teacher, on: :member
       end
       resources :classrooms do
         post :add_teacher_in_classroom, on: :member
         get :classroom_teachers, on: :member
         get :classroom_call_lists, on: :member
         get :classroom_student_answers, on: :member
+        get :export_teachers_in_classroom, on: :member
+        get :export_call_lists_in_classroom, on: :member
+        get :export_student_answers_in_classroom, on: :member
       end
       resources :call_lists do
         get :call_list_teachers, on: :member
         get :call_list_classroom, on: :member
         get :call_list_student_answers, on: :member
+        get :export_teachers_in_call_list, on: :member
+        get :export_student_answers_in_call_list, on: :member
       end
       resources :student_answers do
         get :student_answer_teachers, on: :member

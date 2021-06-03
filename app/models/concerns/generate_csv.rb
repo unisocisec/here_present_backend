@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 module GenerateCsv
@@ -5,11 +7,11 @@ module GenerateCsv
 
   class_methods do
     def generate_csv
-      CSV.generate(headers: true) do |csv|
-        csv << self.attribute_names
+      CSV.generate(headers: true, col_sep: ';', force_quotes: true) do |csv|
+        csv << column_names_to_export
 
         all.each do |record|
-          csv << record.attributes.values
+          csv << record.export_attributes.values
         end
       end
     end

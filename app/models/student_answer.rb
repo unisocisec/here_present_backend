@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class StudentAnswer < ApplicationRecord
+  include GenerateCsv
+
   belongs_to :call_list
   has_one :classroom, through: :call_list
   has_many :teacher_classrooms, through: :classroom
@@ -10,6 +12,14 @@ class StudentAnswer < ApplicationRecord
 
   after_update :set_edited, if: :was_not_edited?
   after_save :set_answer_correct
+
+  def self.column_names_to_export
+    attribute_names.map { |column| human_attribute_name(column) }
+  end
+
+  def export_attributes
+    attributes
+  end
 
   def was_not_edited?
     !edited

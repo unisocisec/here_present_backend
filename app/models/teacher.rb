@@ -33,5 +33,28 @@ class Teacher < ApplicationRecord
     'no salt'
   end
 
+  def self.column_names_to_export
+    export_columns = attribute_names - reject_attributes
+    export_columns.map { |column| human_attribute_name(column) }
+  end
+
+  def self.reject_attributes
+    %w[
+      encrypted_password reset_password_token reset_password_sent_at remember_created_at
+      sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip
+      confirmation_token confirmed_at confirmation_sent_at unconfirmed_email failed_attempts
+      unlock_token locked_at updated_at
+    ]
+  end
+
+  def export_attributes
+    attributes.except!(
+      'encrypted_password', 'reset_password_token', 'reset_password_sent_at', 'remember_created_at',
+      'sign_in_count', 'current_sign_in_at', 'last_sign_in_at', 'current_sign_in_ip', 'last_sign_in_ip',
+      'confirmation_token', 'confirmed_at', 'confirmation_sent_at', 'unconfirmed_email', 'failed_attempts',
+      'unlock_token', 'locked_at', 'updated_at'
+    )
+  end
+
   def password_salt=(new_salt); end
 end

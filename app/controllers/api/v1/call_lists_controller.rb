@@ -54,7 +54,21 @@ module Api
         paginate json: @student_answers, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
+      def export_teachers_in_call_list
+        response = export_service.export_teachers(teachers: @call_list.teachers)
+        render json: { message: response[:message], path: response[:path], call_list: @call_list }, status: response[:status]
+      end
+
+      def export_student_answers_in_call_list
+        response = export_service.export_student_answers(student_answers: @call_list.student_answers)
+        render json: { message: response[:message], path: response[:path], call_list: @call_list }, status: response[:status]
+      end
+
       private
+
+      def export_service
+        @export_service ||= ExportService.new
+      end
 
       def search_call_list_for_id
         @call_list = CallList.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first

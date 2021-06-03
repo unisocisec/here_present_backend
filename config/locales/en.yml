@@ -30,4 +30,39 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  file_name_export_teachers: "export-teachers"
+  activerecord:
+    attributes:
+      teacher:
+        id: "Id"
+        email: "Email"
+        first_name: "First name"
+        last_name: "Last name"
+        created_at: "Created at"
+        updated_at: "Updated at"
+      classroom:
+        id: "Id"
+        name: "Name"
+        school: "School/University"
+        weekday: "Weekday"
+        shift: "Shift"
+        created_at: "Created at"
+        updated_at: "Updated at"
+      call_list:
+        id: "Id"
+        title: "Title"
+        date_start: "Date Start"
+        date_end: "Date End"
+        expired_at: "Expired at"
+        confirmation_code: "Confirmation code"
+        created_at: "Created at"
+        updated_at: "Updated at"
+      student_answer:
+        id: "Id"
+        full_name: "Full name"
+        email: "Email"
+        confirmation_code: "Confirmation code"
+        edited: "Edited"
+        answer_correct: "Answer Correct"
+        created_at: "Created at"
+        updated_at: "Updated at"

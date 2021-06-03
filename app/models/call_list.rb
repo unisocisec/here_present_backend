@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CallList < ApplicationRecord
+  include GenerateCsv
+
   belongs_to :classroom
   has_many :student_answers
   has_many :teacher_classrooms, through: :classroom
@@ -8,6 +10,14 @@ class CallList < ApplicationRecord
 
   validates :title, :classroom_id, presence: true
   validate :check_overlapping
+
+  def self.column_names_to_export
+    attribute_names.map { |column| human_attribute_name(column) }
+  end
+
+  def export_attributes
+    attributes
+  end
 
   private
 

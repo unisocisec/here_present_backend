@@ -66,7 +66,26 @@ module Api
         paginate json: @student_answers, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
+      def export_teachers_in_classroom
+        response = export_service.export_teachers(teachers: @classroom.teachers)
+        render json: { message: response[:message], path: response[:path], classroom: @classroom }, status: response[:status]
+      end
+
+      def export_call_lists_in_classroom
+        response = export_service.export_call_lists(call_lists: @classroom.call_list)
+        render json: { message: response[:message], path: response[:path], classroom: @classroom }, status: response[:status]
+      end
+
+      def export_student_answers_in_classroom
+        response = export_service.export_student_answers_in_classroom(call_lists: @classroom.student_answers)
+        render json: { message: response[:message], path: response[:path], classroom: @classroom }, status: response[:status]
+      end
+
       private
+
+      def export_service
+        @export_service ||= ExportService.new
+      end
 
       def search_classroom_for_id
         @classroom = Classroom.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first
@@ -79,7 +98,7 @@ module Api
         params.permit(
           :name,
           :school,
-          :week_day,
+          :weekday,
           :shift
         )
       end
@@ -88,7 +107,7 @@ module Api
         params.permit(
           :name,
           :school,
-          :week_day,
+          :weekday,
           :shift
         )
       end
