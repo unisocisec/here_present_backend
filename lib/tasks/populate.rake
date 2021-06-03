@@ -14,7 +14,7 @@ def find_or_create_classroom(teacher_id:)
   classroom = Classroom.where(
     name: Faker::Educator.course_name,
     school: Faker::Educator.university,
-    week_day: Classroom::OPTIONS_WEEK_DAY.sample,
+    weekday: Classroom::OPTIONS_WEEKDAY.sample,
     shift: rand(0..2)
   ).first_or_create
   TeacherClassroom.where(teacher_id: teacher_id, classroom_id: classroom.id).first_or_create

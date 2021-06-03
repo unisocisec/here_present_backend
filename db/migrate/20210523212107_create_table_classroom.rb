@@ -5,7 +5,7 @@ class CreateTableClassroom < ActiveRecord::Migration[6.1]
     create_table :classrooms do |t|
       t.string :name, null: false
       t.string :school, null: false
-      t.string :week_day, null: false
+      t.string :weekday, null: false
       t.integer :shift, null: false
       t.timestamps
     end

@@ -11,8 +11,8 @@ class Classroom < ApplicationRecord
   has_many :student_answers, through: :call_lists
 
   enum shift: %i[DIURNAL VESPERTINE NIGHTLY]
-  OPTIONS_WEEK_DAY = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].freeze
+  OPTIONS_WEEKDAY = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].freeze
   validates :name, presence: true
-  validates :shift, inclusion: { in: Classroom.shifts.keys, message: '%<value>s is not a valid shift'  }
-  validates :week_day, inclusion: { in: OPTIONS_WEEK_DAY, message: '%<value>s is not a valid week day' }
+  validates :shift, inclusion: { in: Classroom.shifts.keys, message: '%<value>s is not a valid shift' }
+  validates :weekday, inclusion: { in: OPTIONS_WEEKDAY, message: '%<value>s is not a valid week day' }
 end
