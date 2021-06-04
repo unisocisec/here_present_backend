@@ -32,6 +32,7 @@ development:
   <<: *aws
   CONFIRM_URL: ""
   BUGSNAG_KEY: ""
+  USER_ADMIN: "admin@admin.com"
   JWT_SECRET: 62a2aaa987046dba18b6a9ba46ba73abfeaac227793b2f9644228c008a97e97fc64d45e4aae861f2f2f603506e9e107affdd4535f29cd0a433e8ab58a5280dc4
 
 test:
@@ -40,6 +41,7 @@ test:
   <<: *aws
   CONFIRM_URL: ""
   BUGSNAG_KEY: ""
+  USER_ADMIN: "admin@admin.com"
   JWT_SECRET: 62a2aaa987046dba18b6a9ba46ba73abfeaac227793b2f9644228c008a97e97fc64d45e4aae861f2f2f603506e9e107affdd4535f29cd0a433e8ab58a5280dc4
 
 production:
@@ -51,4 +53,5 @@ production:
   SENTRY_DSN: ''
   CONFIRM_URL: ""
   BUGSNAG_KEY: ""
+  USER_ADMIN: "admin@admin.com"
   JWT_SECRET: 62a2aaa987046dba18b6a9ba46ba73abfeaac227793b2f9644228c008a97e97fc64d45e4aae861f2f2f603506e9e107affdd4535f29cd0a433e8ab58a5280dc4

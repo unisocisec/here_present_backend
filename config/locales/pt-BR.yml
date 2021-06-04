@@ -5,6 +5,7 @@ pt-BR:
     call_lists: "exportacao-chamadas"
     student_answers: "exportacao-estudantes"
   error_password_delete_teacher: "Senha Incorreta, insira a senha correta para continuar com a exclusão"
+  not_have_permission: "você não tem permissão para acessar essa rota"
   activerecord:
     attributes:
       teacher:

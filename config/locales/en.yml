@@ -37,6 +37,7 @@ en:
     call_lists: "export-call_lists"
     student_answers: "export-student_answers"
   error_password_delete_teacher: "Incorrect password, enter correct password to proceed with deletion"
+  not_have_permission: "you do not have permission to access this route."
   activerecord:
     attributes:
       teacher:
