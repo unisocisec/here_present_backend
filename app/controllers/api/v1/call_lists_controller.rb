@@ -7,7 +7,7 @@ module Api
 
       def index
         @call_lists = CallList.joins(:teachers).where(teachers: { id: current_teacher.id })
-        render json: @call_lists
+        paginate json: @call_lists
       end
 
       def show

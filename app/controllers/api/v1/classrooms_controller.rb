@@ -7,7 +7,7 @@ module Api
 
       def index
         @classrooms = Classroom.joins(:teachers).where(teachers: { id: current_teacher.id })
-        render json: { classrooms: @classrooms }
+        paginate json: { classrooms: @classrooms }
       end
 
       def show

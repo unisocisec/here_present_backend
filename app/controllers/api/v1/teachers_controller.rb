@@ -10,7 +10,7 @@ module Api
         return render json: { message: I18n.t("not_have_permission") }, status: :forbidden  unless current_teacher.email == ENV['USER_ADMIN']
         
         @teachers = Teacher.all
-        render json: @teachers
+        paginate json: @teachers
       end
 
       def show
