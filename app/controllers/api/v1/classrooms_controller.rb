@@ -7,11 +7,11 @@ module Api
 
       def index
         @classrooms = Classroom.joins(:teachers).where(teachers: { id: current_teacher.id })
-        paginate json: { classrooms: @classrooms }
+        paginate json: { classrooms: @classrooms }, status: :ok
       end
 
       def show
-        render json: { classroom: @classroom, message: 'registro encontrado' }
+        render json: { classroom: @classroom, message: 'registro encontrado' }, status: :ok
       end
 
       def create
@@ -20,15 +20,15 @@ module Api
           TeacherClassroom.create(teacher_id: current_teacher.id, classroom_id: @classroom.id)
           render json: { classroom: @classroom, message: 'Turma criada com sucesso' }, status: :created
         else
-          render json: @classroom.errors, status: :unprocessable_entity
+          render json: { errors: @classroom.errors }, status: :unprocessable_entity
         end
       end
 
       def update
         if @classroom.update(update_params)
-          render json: @classroom
+          render json: { classroom: @classroom }, status: :ok
         else
-          render json: @classroom.errors, status: :unprocessable_entity
+          render json: { errors: @classroom.errors }, status: :unprocessable_entity
         end
       end
 
@@ -54,17 +54,17 @@ module Api
 
       def classroom_teachers
         @teachers = @classroom.teachers
-        paginate json: @teachers, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: { teachers: @teachers }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def classroom_call_lists
         @call_lists = @classroom.call_lists
-        paginate json: @call_lists, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: { call_lists: @call_lists }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def classroom_student_answers
         @student_answers = @classroom.student_answers
-        paginate json: @student_answers, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: { student_answers: @student_answers }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def export_teachers_in_classroom

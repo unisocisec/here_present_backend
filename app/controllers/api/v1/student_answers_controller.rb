@@ -8,27 +8,27 @@ module Api
 
       def index
         @student_answers = StudentAnswer.joins(:teachers).where(teachers: { id: current_teacher.id })
-        paginate json: @student_answers
+        paginate json: { student_answers: @student_answers }, status: :ok
       end
 
       def show
-        render json: @student_answer
+        render json: { student_answer: @student_answer }, status: :ok
       end
 
       def create
         @student_answer = StudentAnswer.new(create_params)
         if @student_answer.save
-          render json: @student_answer, status: :created
+          render json: { student_answer: @student_answer }, status: :created
         else
-          render json: @student_answer.errors, status: :unprocessable_entity
+          render json: { errors: @student_answer.errors }, status: :unprocessable_entity
         end
       end
 
       def update
         if @student_answer.update(update_params)
-          render json: @student_answer
+          render json: { student_answer: @student_answer }, status: :ok
         else
-          render json: @student_answer.errors, status: :unprocessable_entity
+          render json: { errors: @student_answer.errors }, status: :unprocessable_entity
         end
       end
 
@@ -42,7 +42,7 @@ module Api
 
       def student_answer_teachers
         @teachers = @student_answer.teachers
-        paginate json: @teachers, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: { teachers: @teachers }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def student_answer_classroom

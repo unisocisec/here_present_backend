@@ -7,27 +7,27 @@ module Api
 
       def index
         @call_lists = CallList.joins(:teachers).where(teachers: { id: current_teacher.id })
-        paginate json: @call_lists
+        paginate json: { call_lists: @call_lists }, status: :ok
       end
 
       def show
-        render json: @call_list
+        render json: { call_list: @call_list }, status: :ok
       end
 
       def create
         @call_list = CallList.new(create_params)
         if @call_list.save
-          render json: @call_list, status: :created
+          render json: { call_list: @call_list }, status: :created
         else
-          render json: @call_list.errors, status: :unprocessable_entity
+          render json: { errors: @call_list.errors }, status: :unprocessable_entity
         end
       end
 
       def update
         if @call_list.update(update_params)
-          render json: @call_list
+          render json: { call_list: @call_list }, status: :ok
         else
-          render json: @call_list.errors, status: :unprocessable_entity
+          render json: { errors: @call_list.errors }, status: :unprocessable_entity
         end
       end
 
@@ -41,17 +41,17 @@ module Api
 
       def call_list_teachers
         @teachers = @call_list.teachers
-        paginate json: @teachers, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: { teachers: @teachers }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def call_list_classroom
         @classroom = @call_list.classroom
-        render json: { classroom: @classroom }
+        render json: { classroom: @classroom }, status: :ok
       end
 
       def call_list_student_answers
         @student_answers = @call_list.student_answers
-        paginate json: @student_answers, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: { student_answers: @student_answers }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def export_teachers_in_call_list
