@@ -3,9 +3,9 @@
 class Classroom < ApplicationRecord
   include GenerateCsv
 
-  has_many :teacher_classrooms, dependent: :destroy
+  has_many :teacher_classrooms, dependent: :delete_all
   has_many :teachers, through: :teacher_classrooms
-  has_many :call_lists, dependent: :destroy
+  has_many :call_lists, dependent: :delete_all
   has_many :student_answers, through: :call_lists
 
   serialize :weekdays, Array

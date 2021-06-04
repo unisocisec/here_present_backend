@@ -8,7 +8,7 @@ class Teacher < ApplicationRecord
   include Devise::JWT::RevocationStrategies::Allowlist
   include GenerateCsv
 
-  has_many :teacher_classrooms, dependent: :destroy
+  has_many :teacher_classrooms, dependent: :delete_all
   has_many :classrooms, through: :teacher_classrooms
   has_many :call_lists, through: :classrooms
   has_many :student_answers, through: :call_lists
