@@ -28,6 +28,8 @@
 + `http://localhost:3000/api/v1` -> api endpoint
 + `http://localhost:3000/auth` -> api auth endpoint
 
+### Documentation
+https://documenter.getpostman.com/view/10306115/TzY4ea5F
 
 ### Default users in db:populate
 
