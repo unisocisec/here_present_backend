@@ -4,7 +4,7 @@ class CallList < ApplicationRecord
   include GenerateCsv
 
   belongs_to :classroom
-  has_many :student_answers
+  has_many :student_answers, dependent: :destroy
   has_many :teacher_classrooms, through: :classroom
   has_many :teachers, through: :teacher_classrooms
 
@@ -25,7 +25,7 @@ class CallList < ApplicationRecord
     if date_end.blank? || date_start.blank?
       true
     elsif date_start > date_end
-      errors.add(
+      self.errors.add(
         :date_end,
         "A data de término deve ser posterior à data de início -> Dados: Data de Início: #{date_start} e Data de Final: #{date_end}"
       )

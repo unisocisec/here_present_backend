@@ -7,7 +7,7 @@ class ExportService
   end
 
   def export_classrooms(classrooms:)
-    file = write_in_file(data_for_export: classrooms.generate_csv, title_export: I18n.t('file_name_export.call_lists'))
+    file = write_in_file(data_for_export: classrooms.generate_csv, title_export: I18n.t('file_name_export.classrooms'))
     response_export(file: file)
   end
 

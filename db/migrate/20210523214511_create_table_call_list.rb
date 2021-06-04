@@ -8,7 +8,7 @@ class CreateTableCallList < ActiveRecord::Migration[6.1]
       t.datetime :date_end
       t.datetime :expired_at
       t.references :classroom
-      t.string :confirmation_code, null: false
+      t.string :confirmation_code
       t.timestamps
     end
   end

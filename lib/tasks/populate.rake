@@ -11,11 +11,12 @@ def find_or_create_teacher
 end
 
 def find_or_create_classroom(teacher_id:)
+  weekdays = [Classroom::OPTIONS_WEEKDAYS.sample, Classroom::OPTIONS_WEEKDAYS.sample, Classroom::OPTIONS_WEEKDAYS.sample] if teacher_id.even?
   classroom = Classroom.where(
     name: Faker::Educator.course_name,
     school: Faker::Educator.university,
-    weekday: Classroom::OPTIONS_WEEKDAY.sample,
-    shift: rand(0..2)
+    weekdays: weekdays || [Classroom::OPTIONS_WEEKDAYS.sample],
+    shift: Classroom::OPTIONS_SHIFT.sample
   ).first_or_create
   TeacherClassroom.where(teacher_id: teacher_id, classroom_id: classroom.id).first_or_create
   classroom

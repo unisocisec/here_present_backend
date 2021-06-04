@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class TeacherClassroom < ApplicationRecord
-  belongs_to :teacher
-  belongs_to :classroom
+  belongs_to :teacher, dependent: :destroy
+  belongs_to :classroom, dependent: :destroy
 
   validates :teacher_id, :classroom_id, presence: true
 
