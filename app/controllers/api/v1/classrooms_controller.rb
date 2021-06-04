@@ -6,28 +6,29 @@ module Api
       before_action :search_classroom_for_id, except: %w[index create]
 
       def index
-        @classrooms = Classroom.all
-        render json: { classrooms: @classrooms }
+        @classrooms = Classroom.joins(:teachers).where(teachers: { id: current_teacher.id })
+        paginate json: { classrooms: @classrooms }, status: :ok
       end
 
       def show
-        render json: { classroom: @classroom, message: 'registro encontrado' }
+        render json: { classroom: @classroom, message: 'registro encontrado' }, status: :ok
       end
 
       def create
         @classroom = Classroom.new(create_params)
         if @classroom.save
+          TeacherClassroom.create(teacher_id: current_teacher.id, classroom_id: @classroom.id)
           render json: { classroom: @classroom, message: 'Turma criada com sucesso' }, status: :created
         else
-          render json: @classroom.errors, status: :unprocessable_entity
+          render json: { errors: @classroom.errors }, status: :unprocessable_entity
         end
       end
 
       def update
         if @classroom.update(update_params)
-          render json: @classroom
+          render json: { classroom: @classroom }, status: :ok
         else
-          render json: @classroom.errors, status: :unprocessable_entity
+          render json: { errors: @classroom.errors }, status: :unprocessable_entity
         end
       end
 
@@ -35,7 +36,7 @@ module Api
         @teacher_add = Teacher.find_by_email(params[:teacher_email])
         return render json: { message: 'Não foi possível encontrar um professor com esse email' }, status: :bad_request if @teacher_add.blank?
 
-        @teacher_classroom = TeacherClassroom.new(classroom_id: params[:classroom_id], teacher_id: @teacher_add&.id)
+        @teacher_classroom = TeacherClassroom.new(classroom_id: @classroom.id, teacher_id: @teacher_add&.id)
         if @teacher_classroom.save
           render json: { message: 'Adição do professor com sucesso', teacher_add: @teacher_add }, status: :ok
         else
@@ -53,25 +54,45 @@ module Api
 
       def classroom_teachers
         @teachers = @classroom.teachers
-        render json: { teachers: @teachers }
+        paginate json: { teachers: @teachers }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def classroom_call_lists
         @call_lists = @classroom.call_lists
-        render json: { call_lists: @call_lists }
+        paginate json: { call_lists: @call_lists }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def classroom_student_answers
         @student_answers = @classroom.student_answers
-        render json: { student_answers: @student_answers }
+        paginate json: { student_answers: @student_answers }, per_page: PAGINATE_PER_PAGE, status: :ok
+      end
+
+      def export_teachers_in_classroom
+        response = export_service.export_teachers(teachers: @classroom.teachers)
+        render json: { message: response[:message], path: response[:path], current_classroom: @classroom }, status: response[:status]
+      end
+
+      def export_call_lists_in_classroom
+        response = export_service.export_call_lists(call_lists: @classroom.call_list)
+        render json: { message: response[:message], path: response[:path], current_classroom: @classroom }, status: response[:status]
+      end
+
+      def export_student_answers_in_classroom
+        response = export_service.export_student_answers(student_answers: @classroom.student_answers)
+        render json: { message: response[:message], path: response[:path], current_classroom: @classroom }, status: response[:status]
       end
 
       private
 
+      def export_service
+        @export_service ||= ExportService.new
+      end
+
       def search_classroom_for_id
-        @classroom = Classroom.find_by_id(params[:id])
+        @classroom = Classroom.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first
         return render json: { message: 'Não foi possível encontrar a Turma' }, status: :bad_request if @classroom.blank?
 
+        @classroom.translation_columns unless params[:action] == 'update'
         @classroom
       end
 
@@ -79,8 +100,8 @@ module Api
         params.permit(
           :name,
           :school,
-          :week_day,
-          :shift
+          :shift,
+          weekdays: []
         )
       end
 
@@ -88,8 +109,8 @@ module Api
         params.permit(
           :name,
           :school,
-          :week_day,
-          :shift
+          :shift,
+          weekdays: []
         )
       end
     end

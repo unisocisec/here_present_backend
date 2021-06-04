@@ -28,9 +28,13 @@ gem 'mysql2'
 
 gem 'faker'
 
+gem 'api-pagination'
+gem 'will_paginate'
+
 # Reduces boot times through caching; required in config/boot.rb
-gem 'ffi'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'csv'
+gem 'ffi'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-attack'
@@ -48,8 +52,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'mailcatcher'
   gem 'listen', '~> 3.3'
+  gem 'mailcatcher'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

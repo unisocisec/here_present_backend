@@ -6,28 +6,28 @@ module Api
       before_action :search_call_list_for_id, except: %w[index create]
 
       def index
-        @call_lists = CallList.all
-        render json: @call_lists
+        @call_lists = CallList.joins(:teachers).where(teachers: { id: current_teacher.id })
+        paginate json: { call_lists: @call_lists }, status: :ok
       end
 
       def show
-        render json: @call_list
+        render json: { call_list: @call_list }, status: :ok
       end
 
       def create
         @call_list = CallList.new(create_params)
         if @call_list.save
-          render json: @call_list, status: :created
+          render json: { call_list: @call_list }, status: :created
         else
-          render json: @call_list.errors, status: :unprocessable_entity
+          render json: { errors: @call_list.errors }, status: :unprocessable_entity
         end
       end
 
       def update
         if @call_list.update(update_params)
-          render json: @call_list
+          render json: { call_list: @call_list }, status: :ok
         else
-          render json: @call_list.errors, status: :unprocessable_entity
+          render json: { errors: @call_list.errors }, status: :unprocessable_entity
         end
       end
 
@@ -41,23 +41,37 @@ module Api
 
       def call_list_teachers
         @teachers = @call_list.teachers
-        render json: { teachers: @teachers }
+        paginate json: { teachers: @teachers }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def call_list_classroom
         @classroom = @call_list.classroom
-        render json: { classroom: @classroom }
+        render json: { classroom: @classroom }, status: :ok
       end
 
       def call_list_student_answers
         @student_answers = @call_list.student_answers
-        render json: { student_answers: @student_answers }
+        paginate json: { student_answers: @student_answers }, per_page: PAGINATE_PER_PAGE, status: :ok
+      end
+
+      def export_teachers_in_call_list
+        response = export_service.export_teachers(teachers: @call_list.teachers)
+        render json: { message: response[:message], path: response[:path], current_call_list: @call_list }, status: response[:status]
+      end
+
+      def export_student_answers_in_call_list
+        response = export_service.export_student_answers(student_answers: @call_list.student_answers)
+        render json: { message: response[:message], path: response[:path], current_call_list: @call_list }, status: response[:status]
       end
 
       private
 
+      def export_service
+        @export_service ||= ExportService.new
+      end
+
       def search_call_list_for_id
-        @call_list = CallList.find_by_id(params[:id])
+        @call_list = CallList.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first
         return render json: { message: 'Não foi possível encontrar a Chamada' }, status: :bad_request if @call_list.blank?
 
         @call_list

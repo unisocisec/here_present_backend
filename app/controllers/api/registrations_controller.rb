@@ -22,8 +22,7 @@ module Api
     protected
 
     def sign_up_params
-      params.require(:teacher)
-            .permit(:name, :password, :email, :avatar)
+      params.require(:teacher).permit(:name, :password, :email)
             .merge(role: params[:organization_attributes].present? ? Role.find_by!(name: 'ADMIN') : Role.find_by!(name: 'CUSTOMER'))
     end
 

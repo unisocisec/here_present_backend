@@ -3,36 +3,40 @@
 module Api
   module V1
     class TeachersController < ApplicationController
-      skip_before_action :authenticate_teacher, only: [:create]
-      before_action :search_teacher_for_id, only: %i[show update my_classrooms destroy]
+      skip_before_action :authenticate_teacher!, only: [:create]
+      before_action :search_teacher_for_id, except: %w[index create]
 
       def index
+        return render json: { message: I18n.t("not_have_permission") }, status: :forbidden  unless current_teacher.email == ENV['USER_ADMIN']
+        
         @teachers = Teacher.all
-        render json: @teachers
+        paginate json: { teachers: @teachers }, status: :ok
       end
 
       def show
-        render json: @teacher
+        render json: { teacher: @teacher }, status: :ok
       end
 
       def create
         @teacher = Teacher.new(create_params)
         if @teacher.save
-          render json: @teacher, status: :created
+          render json: { teacher: @teacher }, status: :created
         else
-          render json: @teacher.errors, status: :unprocessable_entity
+          render json: { errors: @teacher.errors }, status: :unprocessable_entity
         end
       end
 
       def update
         if @teacher.update(update_params)
-          render json: @teacher
+          render json: { teacher: @teacher }, status: :ok
         else
-          render json: @teacher.errors, status: :unprocessable_entity
+          render json: { errors: @teacher.errors }, status: :unprocessable_entity
         end
       end
 
       def destroy
+        return render json: { message: I18n.t('error_password_delete_teacher') } unless @teacher.valid_password?(params[:teacher_password])
+
         if @teacher.destroy
           render json: { message: 'Exclusão com sucesso' }, status: :ok
         else
@@ -42,20 +46,39 @@ module Api
 
       def teacher_classrooms
         @classrooms = @teacher.classrooms
-        render json: { classrooms: @classrooms }, status: :ok
+        paginate json: { classrooms: @classrooms }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def teacher_call_lists
         @call_lists = @teacher.call_lists
-        render json: { call_lists: @call_lists }, status: :ok
+        paginate json: { call_lists: @call_lists }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def teacher_student_answers
         @student_answers = @teacher.student_answers
-        render json: { student_answers: @student_answers }, status: :ok
+        paginate json: { student_answers: @student_answers }, per_page: PAGINATE_PER_PAGE, status: :ok
+      end
+
+      def export_classrooms_in_teacher
+        response = export_service.export_classrooms(classrooms: @teacher.classrooms)
+        render json: { message: response[:message], path: response[:path], current_teacher: @teacher }, status: response[:status]
+      end
+
+      def export_call_lists_in_teacher
+        response = export_service.export_call_lists(call_lists: @teacher.call_lists)
+        render json: { message: response[:message], path: response[:path], current_teacher: @teacher }, status: response[:status]
+      end
+
+      def export_student_answers_in_teacher
+        response = export_service.export_student_answers(student_answers: @teacher.student_answers)
+        render json: { message: response[:message], path: response[:path], current_teacher: @teacher }, status: response[:status]
       end
 
       private
+
+      def export_service
+        @export_service ||= ExportService.new
+      end
 
       def create_params
         params.permit(

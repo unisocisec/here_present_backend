@@ -1,0 +1,58 @@
+pt-BR:
+  file_name_export:
+    teachers: "exportacao-professores"
+    classrooms: "exportacao-turmas"
+    call_lists: "exportacao-chamadas"
+    student_answers: "exportacao-estudantes"
+  error_password_delete_teacher: "Senha Incorreta, insira a senha correta para continuar com a exclusão"
+  not_have_permission: "você não tem permissão para acessar essa rota"
+  activerecord:
+    attributes:
+      teacher:
+        id: "Id"
+        email: "E-mail"
+        first_name: "Primeiro nome"
+        last_name: "Sobrenome"
+        created_at: "Data de criação"
+        updated_at: "Data de edição"
+      classroom:
+        id: "Id"
+        name: "Nome"
+        school: "Escola/Universidade"
+        weekdays: "Dias da semana"
+        weekday:
+          Monday: "Segunda-feira"
+          Tuesday: "Terça-feira"
+          Wednesday: "Quarta-feira"
+          Thursday: "Quinta-feira"
+          Friday: "Sexta-feira"
+          Saturday: "Sábado"
+          Sunday: "Domigo" 
+        shift: "Turno"
+        shifts:
+          Diurnal: "Matutino"
+          Vespertine: "Vespertino"
+          Nightly: "Noturno"
+        created_at: "Data de criação"
+        updated_at: "Data de edição"
+      call_list:
+        id: "Id"
+        title: "Título"
+        date_start: "Data de início"
+        date_end: "Data de final"
+        expired_at: "Data de expiração"
+        confirmation_code: "Código de confirmação"
+        created_at: "Data de criação"
+        updated_at: "Data de edição"
+      student_answer:
+        id: "Id"
+        full_name: "Nome completo"
+        email: "E-mail"
+        confirmation_code: "Código de confirmação"
+        edited: "Editado"
+        answer_correct: "Resposta correta"
+        created_at: "Data de criação"
+        updated_at: "Data de edição"
+
+
+

@@ -3,43 +3,36 @@
 module Api
   module V1
     class StudentAnswersController < ApplicationController
-      skip_before_action :authenticate_teacher, only: [:create]
+      skip_before_action :authenticate_teacher!, only: [:create]
       before_action :search_student_answer_for_id, except: %w[index create]
 
       def index
-        @student_answers = StudentAnswer.all
-        render json: @student_answers
+        @student_answers = StudentAnswer.joins(:teachers).where(teachers: { id: current_teacher.id })
+        paginate json: { student_answers: @student_answers }, status: :ok
       end
 
       def show
-        @student_answer = StudentAnswer.find_by_id(params[:id])
-        if @student_answer.present?
-          render json: @student_answer
-        else
-          render json: { message: 'Não foi possível identificar Turma com esse ID' }, status: :bad_request
-        end
+        render json: { student_answer: @student_answer }, status: :ok
       end
 
       def create
         @student_answer = StudentAnswer.new(create_params)
         if @student_answer.save
-          render json: @student_answer, status: :created
+          render json: { student_answer: @student_answer }, status: :created
         else
-          render json: @student_answer.errors, status: :unprocessable_entity
+          render json: { errors: @student_answer.errors }, status: :unprocessable_entity
         end
       end
 
       def update
-        @student_answer = StudentAnswer.find_by_id(params[:id])
         if @student_answer.update(update_params)
-          render json: @student_answer
+          render json: { student_answer: @student_answer }, status: :ok
         else
-          render json: @student_answer.errors, status: :unprocessable_entity
+          render json: { errors: @student_answer.errors }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @student_answer = StudentAnswer.find_by_id(params[:id])
         if @student_answer.destroy
           render json: { message: 'Exclusão com sucesso' }, status: :ok
         else
@@ -49,7 +42,7 @@ module Api
 
       def student_answer_teachers
         @teachers = @student_answer.teachers
-        render json: { teachers: @teachers }, status: :ok
+        paginate json: { teachers: @teachers }, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def student_answer_classroom
@@ -65,8 +58,8 @@ module Api
       private
 
       def search_student_answer_for_id
-        @student_answer = StudentAnswer.find_by_id(params[:id])
-        return render json: { message: 'Não foi possível encontrar a Estudante' }, status: :bad_request if @student_answer.blank?
+        @student_answer = StudentAnswer.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first
+        return render json: { message: 'Não foi possível encontrar a(o) Estudante' }, status: :bad_request if @student_answer.blank?
 
         @student_answer
       end
