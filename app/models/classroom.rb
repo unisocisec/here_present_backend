@@ -18,10 +18,8 @@ class Classroom < ApplicationRecord
   validate :check_weekdays
 
   def check_weekdays
-    self.weekdays.each do |week|
-      unless OPTIONS_WEEKDAYS.include?(week)
-        self.errors.add(:weekdays, "Datas de Semana Invalidas") 
-      end
+    weekdays.each do |week|
+      errors.add(:weekdays, 'Datas de Semana Invalidas') unless OPTIONS_WEEKDAYS.include?(week)
     end
   end
 
@@ -34,8 +32,8 @@ class Classroom < ApplicationRecord
   end
 
   def translation_columns
-    self.shift_translate
-    self.weekdays_translate
+    shift_translate
+    weekdays_translate
   end
 
   def shift_translate
@@ -43,6 +41,6 @@ class Classroom < ApplicationRecord
   end
 
   def weekdays_translate
-    self.weekdays = weekdays.map{ |weekday| Classroom.human_enum_name(:weekday, weekday)}
+    self.weekdays = weekdays.map { |weekday| Classroom.human_enum_name(:weekday, weekday) }
   end
 end

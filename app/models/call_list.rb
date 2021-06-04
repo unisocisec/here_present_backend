@@ -25,7 +25,7 @@ class CallList < ApplicationRecord
     if date_end.blank? || date_start.blank?
       true
     elsif date_start > date_end
-      self.errors.add(
+      errors.add(
         :date_end,
         "A data de término deve ser posterior à data de início -> Dados: Data de Início: #{date_start} e Data de Final: #{date_end}"
       )
