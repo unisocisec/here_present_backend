@@ -31,6 +31,12 @@
 
 en:
   file_name_export_teachers: "export-teachers"
+  file_name_export:
+    teachers: "export-teachers"
+    classrooms: "export-classrooms"
+    call_lists: "export-call_lists"
+    student_answers: "export-student_answers"
+  error_password_delete_teacher: "Incorrect password, enter correct password to proceed with deletion"
   activerecord:
     attributes:
       teacher:
@@ -44,8 +50,20 @@ en:
         id: "Id"
         name: "Name"
         school: "School/University"
-        weekday: "Weekday"
+        weekdays: "Weekdays"
+        weekday:
+          Monday: "Monday"
+          Tuesday: "Tuesday"
+          Wednesday: "Wednesday"
+          Thursday: "Thursday"
+          Friday: "Friday"
+          Saturday: "Saturday"
+          Sunday: "Sunday"
         shift: "Shift"
+        shifts:
+          Diurnal: "Diurnal"
+          Vespertine: "Vespertine"
+          Nightly: "Nightly"
         created_at: "Created at"
         updated_at: "Updated at"
       call_list:
