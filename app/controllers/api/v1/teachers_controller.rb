@@ -4,7 +4,7 @@ module Api
   module V1
     class TeachersController < ApplicationController
       skip_before_action :authenticate_teacher!, only: [:create]
-      before_action :search_teacher_for_id, only: %i[show update my_classrooms destroy]
+      before_action :search_teacher_for_id, except: %w[index create]
 
       def index
         @teachers = Teacher.all
@@ -33,6 +33,8 @@ module Api
       end
 
       def destroy
+        return I18n.t('error_password_delete_teacher') unless @teacher.valid_password?(params[:teacher_password])
+
         if @teacher.destroy
           render json: { message: 'Exclusão com sucesso' }, status: :ok
         else
@@ -57,17 +59,17 @@ module Api
 
       def export_classrooms_in_teacher
         response = export_service.export_classrooms(classrooms: @teacher.classrooms)
-        render json: { message: response[:message], path: response[:path], teacher: @teacher }, status: response[:status]
+        render json: { message: response[:message], path: response[:path], current_teacher: @teacher }, status: response[:status]
       end
 
       def export_call_lists_in_teacher
-        response = export_service.export_call_lists_in_teacher(call_lists: @teacher.call_list)
-        render json: { message: response[:message], path: response[:path], teacher: @teacher }, status: response[:status]
+        response = export_service.export_call_lists(call_lists: @teacher.call_lists)
+        render json: { message: response[:message], path: response[:path], current_teacher: @teacher }, status: response[:status]
       end
 
       def export_student_answers_in_teacher
         response = export_service.export_student_answers(student_answers: @teacher.student_answers)
-        render json: { message: response[:message], path: response[:path], teacher: @teacher }, status: response[:status]
+        render json: { message: response[:message], path: response[:path], current_teacher: @teacher }, status: response[:status]
       end
 
       private

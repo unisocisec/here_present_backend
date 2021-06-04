@@ -17,6 +17,7 @@ module Api
       def create
         @classroom = Classroom.new(create_params)
         if @classroom.save
+          TeacherClassroom.create(teacher_id: current_teacher.id, classroom_id: @classroom.id)
           render json: { classroom: @classroom, message: 'Turma criada com sucesso' }, status: :created
         else
           render json: @classroom.errors, status: :unprocessable_entity
@@ -35,7 +36,7 @@ module Api
         @teacher_add = Teacher.find_by_email(params[:teacher_email])
         return render json: { message: 'Não foi possível encontrar um professor com esse email' }, status: :bad_request if @teacher_add.blank?
 
-        @teacher_classroom = TeacherClassroom.new(classroom_id: params[:classroom_id], teacher_id: @teacher_add&.id)
+        @teacher_classroom = TeacherClassroom.new(classroom_id: @classroom.id, teacher_id: @teacher_add&.id)
         if @teacher_classroom.save
           render json: { message: 'Adição do professor com sucesso', teacher_add: @teacher_add }, status: :ok
         else
@@ -68,17 +69,17 @@ module Api
 
       def export_teachers_in_classroom
         response = export_service.export_teachers(teachers: @classroom.teachers)
-        render json: { message: response[:message], path: response[:path], classroom: @classroom }, status: response[:status]
+        render json: { message: response[:message], path: response[:path], current_classroom: @classroom }, status: response[:status]
       end
 
       def export_call_lists_in_classroom
         response = export_service.export_call_lists(call_lists: @classroom.call_list)
-        render json: { message: response[:message], path: response[:path], classroom: @classroom }, status: response[:status]
+        render json: { message: response[:message], path: response[:path], current_classroom: @classroom }, status: response[:status]
       end
 
       def export_student_answers_in_classroom
-        response = export_service.export_student_answers_in_classroom(call_lists: @classroom.student_answers)
-        render json: { message: response[:message], path: response[:path], classroom: @classroom }, status: response[:status]
+        response = export_service.export_student_answers(student_answers: @classroom.student_answers)
+        render json: { message: response[:message], path: response[:path], current_classroom: @classroom }, status: response[:status]
       end
 
       private
@@ -91,6 +92,7 @@ module Api
         @classroom = Classroom.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first
         return render json: { message: 'Não foi possível encontrar a Turma' }, status: :bad_request if @classroom.blank?
 
+        @classroom.translation_columns unless params[:action] == 'update'
         @classroom
       end
 
@@ -98,8 +100,8 @@ module Api
         params.permit(
           :name,
           :school,
-          :weekday,
-          :shift
+          :shift,
+          weekdays: []
         )
       end
 
@@ -107,8 +109,8 @@ module Api
         params.permit(
           :name,
           :school,
-          :weekday,
-          :shift
+          :shift,
+          weekdays: []
         )
       end
     end

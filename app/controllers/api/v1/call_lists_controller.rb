@@ -56,12 +56,12 @@ module Api
 
       def export_teachers_in_call_list
         response = export_service.export_teachers(teachers: @call_list.teachers)
-        render json: { message: response[:message], path: response[:path], call_list: @call_list }, status: response[:status]
+        render json: { message: response[:message], path: response[:path], current_call_list: @call_list }, status: response[:status]
       end
 
       def export_student_answers_in_call_list
         response = export_service.export_student_answers(student_answers: @call_list.student_answers)
-        render json: { message: response[:message], path: response[:path], call_list: @call_list }, status: response[:status]
+        render json: { message: response[:message], path: response[:path], current_call_list: @call_list }, status: response[:status]
       end
 
       private
