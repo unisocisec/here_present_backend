@@ -14,13 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl-dev \
     htop \
     libpq-dev \
-    mariadb-client \
     postgresql-client \
     default-mysql-client \
     default-libmysqlclient-dev \
-    libmariadb-client-lgpl-dev \
-    libmariadb-client-lgpl-dev-compat \
-    libmariadbclient-dev \
     libgdbm-dev \
     libmagic-dev \
     imagemagick \
