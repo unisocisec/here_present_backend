@@ -38,9 +38,9 @@ gem 'csv'
 gem 'ffi'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+gem 'minitest'
 gem 'rack-attack'
 gem 'rack-cors'
-gem "minitest"
 
 group :development, :test do
   gem 'rubocop'

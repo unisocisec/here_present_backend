@@ -7,8 +7,8 @@ module Api
       before_action :search_teacher_for_id, except: %w[index create]
 
       def index
-        return render json: { message: I18n.t("not_have_permission") }, status: :forbidden  unless current_teacher.email == ENV['USER_ADMIN']
-        
+        return render json: { message: I18n.t('not_have_permission') }, status: :forbidden unless current_teacher.email == ENV['USER_ADMIN']
+
         @teachers = Teacher.all
         paginate json: { teachers: @teachers }, status: :ok
       end
