@@ -285,7 +285,7 @@ DEPENDENCIES
   mailcatcher
   minitest
   pg
-  puma (~> 5.0)
+  puma
   rack-attack
   rack-cors
   rails (~> 6.1.3, >= 6.1.3.2)

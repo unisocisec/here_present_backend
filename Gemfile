@@ -30,7 +30,7 @@ gem 'ffi'
 gem 'listen'
 gem 'minitest'
 gem 'pg'
-gem 'puma', '~> 5.0'
+gem 'puma'
 gem 'rack-attack'
 gem 'rack-cors'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
