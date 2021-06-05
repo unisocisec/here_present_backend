@@ -13,7 +13,10 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20_210_524_233_313) do
-  create_table 'allowlisted_jwts', charset: 'utf8', force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension 'plpgsql'
+
+  create_table 'allowlisted_jwts', force: :cascade do |t|
     t.string 'jti', null: false
     t.string 'aud'
     t.datetime 'exp', null: false
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20_210_524_233_313) do
     t.index ['teacher_id'], name: 'index_allowlisted_jwts_on_teacher_id'
   end
 
-  create_table 'call_lists', charset: 'utf8', force: :cascade do |t|
+  create_table 'call_lists', force: :cascade do |t|
     t.string 'title', null: false
     t.datetime 'date_start'
     t.datetime 'date_end'
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 20_210_524_233_313) do
     t.index ['classroom_id'], name: 'index_call_lists_on_classroom_id'
   end
 
-  create_table 'classrooms', charset: 'utf8', force: :cascade do |t|
+  create_table 'classrooms', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'school'
     t.string 'weekdays'
@@ -44,7 +47,7 @@ ActiveRecord::Schema.define(version: 20_210_524_233_313) do
     t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table 'student_answers', charset: 'utf8', force: :cascade do |t|
+  create_table 'student_answers', force: :cascade do |t|
     t.string 'full_name', null: false
     t.string 'email', null: false
     t.string 'confirmation_code'
@@ -56,7 +59,7 @@ ActiveRecord::Schema.define(version: 20_210_524_233_313) do
     t.index ['call_list_id'], name: 'index_student_answers_on_call_list_id'
   end
 
-  create_table 'teacher_classrooms', charset: 'utf8', force: :cascade do |t|
+  create_table 'teacher_classrooms', force: :cascade do |t|
     t.bigint 'teacher_id'
     t.bigint 'classroom_id'
     t.datetime 'created_at', precision: 6, null: false
@@ -65,7 +68,7 @@ ActiveRecord::Schema.define(version: 20_210_524_233_313) do
     t.index ['teacher_id'], name: 'index_teacher_classrooms_on_teacher_id'
   end
 
-  create_table 'teachers', charset: 'utf8', force: :cascade do |t|
+  create_table 'teachers', force: :cascade do |t|
     t.string 'email', default: '', null: false
     t.string 'encrypted_password', default: '', null: false
     t.string 'reset_password_token'
