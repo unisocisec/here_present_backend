@@ -281,7 +281,7 @@ DEPENDENCIES
   devise-jwt
   faker
   ffi
-  listen (~> 3.3)
+  listen
   mailcatcher
   minitest
   pg
