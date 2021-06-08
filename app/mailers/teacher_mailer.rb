@@ -9,7 +9,7 @@ class TeacherMailer < ApplicationMailer
   end
 
   def password_reset_code
-    @subject = 'Código de verificação - uButeco'
+    @subject = 'Código de verificação - Here Present'
     mail to: @teacher.email, subject: @subject
   end
 

@@ -116,7 +116,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: 'example.herokuapp.com', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: 'herepresent.herokuapp.com', protocol: 'https' }
   config.action_mailer.smtp_settings = {
     address: ENV['MAILER_ADDRESS'],
     port: ENV['MAILER_PORT'],
@@ -129,6 +129,6 @@ Rails.application.configure do
   }
 
   # websocket config
-  config.web_socket_server_url = 'wss://example.herokuapp.com/api/cable'
-  config.action_cable.allowed_request_origins = %w[https://example.cookiecode.com.br https://example-ce9c3.web.app/]
+  # config.web_socket_server_url = 'wss://example.herokuapp.com/api/cable'
+  # config.action_cable.allowed_request_origins = %w[https://example.cookiecode.com.br https://example-ce9c3.web.app/]
 end
