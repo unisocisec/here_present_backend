@@ -12,13 +12,13 @@ module Api
       end
 
       def show
-        render json: { student_answer: @student_answer }, status: :ok
+        render json: { student_answer: @student_answer, message: I18n.t('show_record_found') }, status: :ok
       end
 
       def create
         @student_answer = StudentAnswer.new(create_params)
         if @student_answer.save
-          render json: { student_answer: @student_answer }, status: :created
+          render json: { student_answer: @student_answer, message: I18n.t('success.create.student_answer') }, status: :created
         else
           render json: { errors: @student_answer.errors }, status: :unprocessable_entity
         end
@@ -34,9 +34,9 @@ module Api
 
       def destroy
         if @student_answer.destroy
-          render json: { message: 'Exclusão com sucesso' }, status: :ok
+          render json: { message: I18n.t('success.destroy.student_answer') }, status: :ok
         else
-          render json: { message: 'Exclusão com error' }, status: :bad_request
+          render json: { message: I18n.t('error.destroy.student_answer') }, status: :bad_request
         end
       end
 
@@ -59,7 +59,7 @@ module Api
 
       def search_student_answer_for_id
         @student_answer = StudentAnswer.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first
-        return render json: { message: 'Não foi possível encontrar a(o) Estudante' }, status: :bad_request if @student_answer.blank?
+        return render json: { message: I18n.t('messages.dont_find.student_answer') }, status: :bad_request if @student_answer.blank?
 
         @student_answer
       end

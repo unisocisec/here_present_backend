@@ -6,6 +6,33 @@ pt-BR:
     student_answers: "exportacao-estudantes"
   error_password_delete_teacher: "Senha Incorreta, insira a senha correta para continuar com a exclusão"
   not_have_permission: "você não tem permissão para acessar essa rota"
+  not_find_teacher_with_email: "Não foi possível encontrar um professor com esse email"
+  successful_teacher_addition: "Adição do professor com sucesso"
+  error_adding_teacher: "Erro ao adicionar o professor"
+  show_record_found: "Registro encontrado"
+  messages:
+    dont_find:
+      call_list: 'Não foi possível encontrar a chamada'
+      classroom: 'Não foi possível encontrar a turma'
+      student_answer: 'Não foi possível encontrar o(a) estudante'
+      teacher: 'Não foi possível encontrar o professor'
+  success:
+    create:
+      call_list: "Chamada criada com sucesso"
+      classroom: "Turma criada com sucesso"
+      student_answer: "Estudante criado(a) com sucesso"
+      teacher: "Professor criado com sucesso"
+    destroy:
+      call_list: "Chamada excluída com sucesso"
+      classroom: "Turma excluída com sucesso"
+      student_answer: "Estudante excluído(a) com sucesso"
+      teacher: "Professor excluído com sucesso"
+  error:
+    destroy:
+      call_list: "Erro ao excluir a chamada"
+      classroom: "Erro ao excluir a turma"
+      student_answer: "Erro ao excluir o(a) estudante"
+      teacher: "Erro ao excluir o professor"
   activerecord:
     attributes:
       teacher:

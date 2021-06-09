@@ -14,13 +14,13 @@ module Api
       end
 
       def show
-        render json: { teacher: @teacher }, status: :ok
+        render json: { teacher: @teacher, message: I18n.t('show_record_found') }, status: :ok
       end
 
       def create
         @teacher = Teacher.new(create_params)
         if @teacher.save
-          render json: { teacher: @teacher }, status: :created
+          render json: { teacher: @teacher, message: I18n.t('success.create.teacher') }, status: :created
         else
           render json: { errors: @teacher.errors }, status: :unprocessable_entity
         end
@@ -38,9 +38,9 @@ module Api
         return render json: { message: I18n.t('error_password_delete_teacher') } unless @teacher.valid_password?(params[:teacher_password])
 
         if @teacher.destroy
-          render json: { message: 'Exclusão com sucesso' }, status: :ok
+          render json: { message: I18n.t('success.destroy.teacher') }, status: :ok
         else
-          render json: { message: 'Exclusão com error' }, status: :bad_request
+          render json: { message: I18n.t('error.destroy.teacher') }, status: :bad_request
         end
       end
 
@@ -98,7 +98,7 @@ module Api
 
       def search_teacher_for_id
         @teacher = Teacher.find_by_id(params[:id].to_i)
-        return render json: { message: 'Não foi possível encontrar o professor' }, status: :bad_request if @teacher.blank?
+        return render json: { message: I18n.t('messages.dont_find.teacher') }, status: :bad_request if @teacher.blank?
 
         @teacher
       end

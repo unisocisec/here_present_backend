@@ -38,6 +38,33 @@ en:
     student_answers: "export-student_answers"
   error_password_delete_teacher: "Incorrect password, enter correct password to proceed with deletion"
   not_have_permission: "you do not have permission to access this route."
+  not_find_teacher_with_email: "We couldn't find a teacher with this email"
+  successful_teacher_addition: "Successful teacher addition"
+  error_adding_teacher: "Error adding teacher"
+  show_record_found: "Record found"
+  messages:
+    dont_find:
+      call_list: 'Unable to find call list'
+      classroom: 'Unable to find classroom'
+      student_answer: 'Unable to find student'
+      teacher: 'Unable to find teacher'
+  success:
+    create:
+      call_list: "Call list created successfully"
+      classroom: "Classroom created successfully"
+      student_answer: "Student created successfully"
+      teacher: "Teacher created successfully"
+    destroy:
+      call_list: "Call list deleted successfully"
+      classroom: "Classroom deleted successfully"
+      student_answer: "Student deleted successfully"
+      teacher: "Teacher deleted successfully"
+  error:
+    destroy:
+      call_list: "Error deleting call list"
+      classroom: "Error deleting classroom"
+      student_answer: "Error deleting student"
+      teacher: "Error deleting teacher"
   activerecord:
     attributes:
       teacher:

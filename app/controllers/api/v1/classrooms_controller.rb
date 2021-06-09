@@ -11,14 +11,14 @@ module Api
       end
 
       def show
-        render json: { classroom: @classroom, message: 'registro encontrado' }, status: :ok
+        render json: { classroom: @classroom, message: I18n.t('show_record_found') }, status: :ok
       end
 
       def create
         @classroom = Classroom.new(create_params)
         if @classroom.save
           TeacherClassroom.create(teacher_id: current_teacher.id, classroom_id: @classroom.id)
-          render json: { classroom: @classroom, message: 'Turma criada com sucesso' }, status: :created
+          render json: { classroom: @classroom, message: I18n.t('success.create.classroom') }, status: :created
         else
           render json: { errors: @classroom.errors }, status: :unprocessable_entity
         end
@@ -34,21 +34,21 @@ module Api
 
       def add_teacher_in_classroom
         @teacher_add = Teacher.find_by_email(params[:teacher_email])
-        return render json: { message: 'Não foi possível encontrar um professor com esse email' }, status: :bad_request if @teacher_add.blank?
+        return render json: { message: I18n.t('not_find_teacher_with_email') }, status: :bad_request if @teacher_add.blank?
 
         @teacher_classroom = TeacherClassroom.new(classroom_id: @classroom.id, teacher_id: @teacher_add&.id)
         if @teacher_classroom.save
-          render json: { message: 'Adição do professor com sucesso', teacher_add: @teacher_add }, status: :ok
+          render json: { message: I18n.t('successful_teacher_addition'), teacher_add: @teacher_add }, status: :ok
         else
-          render json: { message: 'Erro ao adicionar o professor' }, status: :bad_request
+          render json: { message: I18n.t('error_adding_teacher') }, status: :bad_request
         end
       end
 
       def destroy
         if @classroom.destroy
-          render json: { message: 'Exclusão com sucesso', classroom: @classroom }, status: :ok
+          render json: { message: I18n.t('success.destroy.classroom'), classroom: @classroom }, status: :ok
         else
-          render json: { message: 'Exclusão com error' }, status: :bad_request
+          render json: { message: I18n.t('error.destroy.classroom') }, status: :bad_request
         end
       end
 
@@ -90,7 +90,7 @@ module Api
 
       def search_classroom_for_id
         @classroom = Classroom.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first
-        return render json: { message: 'Não foi possível encontrar a Turma' }, status: :bad_request if @classroom.blank?
+        return render json: { message: I18n.t('messages.dont_find.classroom') }, status: :bad_request if @classroom.blank?
 
         @classroom.translation_columns unless params[:action] == 'update'
         @classroom
