@@ -56,5 +56,22 @@ class Teacher < ApplicationRecord
     )
   end
 
+  def generate_code
+    loop do
+      code = ''
+      6.times do
+        code += (0..9).to_a.sample.to_s
+      end
+      break code unless Teacher.find_by(reset_password_token: code)
+    end
+  end
+
+  def send_welcome
+    TeacherMailer.with(
+      teacher: self,
+      generated_password: @generated_password
+    ).welcome.deliver_now!
+  end
+
   def password_salt=(new_salt); end
 end

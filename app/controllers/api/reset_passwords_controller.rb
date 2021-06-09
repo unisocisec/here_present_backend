@@ -2,7 +2,6 @@
 
 module Api
   class ResetPasswordsController < ApplicationController
-
     def update
       if current_teacher.update(reset_params)
         render json: { current_teacher: current_teacher }, status: :ok

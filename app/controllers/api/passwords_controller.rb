@@ -12,7 +12,7 @@ module Api
         @teacher.reset_password_token = code
         @teacher.reset_password_sent_at = Time.now.utc
         @teacher.save
-        # UserMailer.with(user: @teacher, code: code).password_reset_code.deliver_now!
+        TeacherMailer.with(user: @teacher, code: code).password_reset_code.deliver_now!
         render json: {}, status: :ok
       end
     end

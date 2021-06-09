@@ -1,4 +1,15 @@
 pt-BR:
+  welcome:
+    title: "Seja bem vindo ao uButeco"
+    subject: "Seja bemh vindo ao uButeco"
+    text: "Seja bem vindo ao uButeco"
+  confirmations:
+    title: "Confirmação de conta"
+    instruction: "Para confirmar sua conta por favor clique no link abaixou ou copie a url abaixo e cole em seu navegador"
+    link_to_confirm: "Confirmar minha conta"
+  email_changed:
+    title: "Email alterado"
+    message: "Email alterado"
   file_name_export:
     teachers: "exportacao-professores"
     classrooms: "exportacao-turmas"
