@@ -7,7 +7,7 @@
 + With Docker
   + Docker
   + Docker compose
-  + MariaDb
+  + Postgres
   + Rails 6.x
   + Ruby 3.0.0
 
