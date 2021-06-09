@@ -11,13 +11,13 @@ module Api
       end
 
       def show
-        render json: { call_list: @call_list }, status: :ok
+        render json: { call_list: @call_list, message: I18n.t('show_record_found') }, status: :ok
       end
 
       def create
         @call_list = CallList.new(create_params)
         if @call_list.save
-          render json: { call_list: @call_list }, status: :created
+          render json: { call_list: @call_list, message: I18n.t('success.create.call_list') }, status: :created
         else
           render json: { errors: @call_list.errors }, status: :unprocessable_entity
         end
@@ -33,9 +33,9 @@ module Api
 
       def destroy
         if @call_list.destroy
-          render json: { message: 'Exclusão com sucesso' }, status: :ok
+          render json: { message: I18n.t('success.destroy.call_list') }, status: :ok
         else
-          render json: { message: 'Exclusão com error' }, status: :bad_request
+          render json: { message: I18n.t('error.destroy.call_list') }, status: :bad_request
         end
       end
 
@@ -72,7 +72,7 @@ module Api
 
       def search_call_list_for_id
         @call_list = CallList.joins(:teachers).where(id: params[:id], teachers: { id: current_teacher.id }).first
-        return render json: { message: 'Não foi possível encontrar a Chamada' }, status: :bad_request if @call_list.blank?
+        return render json: { message: I18n.t('messages.dont_find.call_list') }, status: :bad_request if @call_list.blank?
 
         @call_list
       end

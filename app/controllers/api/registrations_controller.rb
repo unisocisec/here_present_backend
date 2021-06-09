@@ -5,15 +5,10 @@ module Api
     respond_to :json
 
     def create
-      @teacher = Teacher.new sign_up_params
-      @teacher.save
-      if @teacher.errors.empty?
-        if params[:organization_attributes].nil?
-          sign_in @teacher
-          render json: @teacher, include: :role
-        else
-          create_with_organization
-        end
+      @teacher = Teacher.new(sign_up_params)
+      if @teacher.save
+        sign_in @teacher
+        render json: @teacher, status: :ok
       else
         render json: @teacher.errors, status: :unprocessable_entity
       end
@@ -22,29 +17,7 @@ module Api
     protected
 
     def sign_up_params
-      params.require(:teacher).permit(:name, :password, :email)
-            .merge(role: params[:organization_attributes].present? ? Role.find_by!(name: 'ADMIN') : Role.find_by!(name: 'CUSTOMER'))
-    end
-
-    def organization_params
-      params.require(:organization_attributes)
-            .permit(:cnpj, :logo, :name, :phone).merge(teacher_id: @teacher.id)
-    end
-
-    def build_organization
-      @organization = Organization.new(organization_params)
-      @organization.save
-    end
-
-    def create_with_organization
-      if build_organization
-        @teacher.update(organization_id: @organization.id)
-        sign_in @teacher
-        render json: @teacher, include: [:role, { organization: { include: [:theme] } }]
-      else
-        @teacher.really_destroy!
-        render json: @organization.errors, status: :unprocessable_entity
-      end
+      params.require(:name, :password, :email)
     end
   end
 end

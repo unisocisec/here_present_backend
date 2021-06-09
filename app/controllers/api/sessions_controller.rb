@@ -6,7 +6,7 @@ module Api
     respond_to :json
 
     def new
-      render json: { response: 'Authentication required' }, status: 401
+      render json: { response: I18n.t('authentication_required') }, status: 401
     end
 
     private
