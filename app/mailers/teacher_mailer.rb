@@ -4,12 +4,12 @@ class TeacherMailer < ApplicationMailer
   before_action :load_teacher
 
   def welcome
-    @subject = t('welcome.subject')
+    @subject = I18n.t('mailer.subject.welcome')
     mail to: @teacher.email, subject: @subject
   end
 
   def password_reset_code
-    @subject = 'Código de verificação - Here Present'
+    @subject = I18n.t('mailer.subject.password_reset_code')
     mail to: @teacher.email, subject: @subject
   end
 

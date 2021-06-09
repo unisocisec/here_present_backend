@@ -3,6 +3,6 @@
 <h2><%= I18n.t('welcome.text') %></h2>
 
 <% if @generated_password.present? %>
-  Email <%= @teacher.email %> <br>
-  Senha gerada <%= @generated_password %>
+  <%= I18n.t('email') %>: <%= @teacher.email %> <br>
+  <%= I18n.t('password_generated') %>: <%= @generated_password %>
 <% end %>

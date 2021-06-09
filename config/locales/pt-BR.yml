@@ -1,11 +1,14 @@
 pt-BR:
+  hello: "Olá"
+  below_code_reset_password: "Abaixo se encontra o código para resetar a sua senha"
+  email: "E-mail"
+  password_generated: "Senha gerada"
   welcome:
-    title: "Seja bem vindo ao uButeco"
-    subject: "Seja bemh vindo ao uButeco"
-    text: "Seja bem vindo ao uButeco"
+    title: "Seja bem vindo ao Here Present"
+    text: "Seja bem vindo ao Here Present"
   confirmations:
     title: "Confirmação de conta"
-    instruction: "Para confirmar sua conta por favor clique no link abaixou ou copie a url abaixo e cole em seu navegador"
+    instruction: "Para confirmar sua conta por favor clique no link abaixo ou copie a url abaixo e cole em seu navegador"
     link_to_confirm: "Confirmar minha conta"
   email_changed:
     title: "Email alterado"
@@ -22,12 +25,20 @@ pt-BR:
   error_adding_teacher: "Erro ao adicionar o professor"
   authentication_required: "autenticação é requerida, para autenticar vá para a rota /auth/sign_in"
   show_record_found: "Registro encontrado"
+  check_overlapping_call_list: "A data de término deve ser posterior à data de início -> Dados: Data de Início: %{date_start} e Data de Final: %{date_end}"
+  invalid_week_dates: "Datas de semana inválidas"
+  successful_export: "Exportação com sucesso"
+  invalid_shift: "%{shift_value} não é um turno válido. Permitidos: Matutino, Vespertino ou Noturno"
+  mailer:
+    subject:
+      welcome: "Seja bem vindo ao Here Present"
+      password_reset_code: "Código de verificação - Here Present"
   messages:
     dont_find:
-      call_list: 'Não foi possível encontrar a chamada'
-      classroom: 'Não foi possível encontrar a turma'
-      student_answer: 'Não foi possível encontrar o(a) estudante'
-      teacher: 'Não foi possível encontrar o professor'
+      call_list: "Não foi possível encontrar a chamada"
+      classroom: "Não foi possível encontrar a turma"
+      student_answer: "Não foi possível encontrar o(a) estudante"
+      teacher: "Não foi possível encontrar o professor"
   success:
     create:
       call_list: "Chamada criada com sucesso"

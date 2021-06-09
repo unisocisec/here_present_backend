@@ -32,6 +32,6 @@ class ExportService
 
   def response_export(file:)
     real_path = "#{ENV['ENV_URL']}/" + file.path.to_s.gsub('public/', '')
-    { path: real_path, status: :ok, message: 'Exportação com sucesso' }
+    { path: real_path, status: :ok, message: I18n.t('successful_export') }
   end
 end

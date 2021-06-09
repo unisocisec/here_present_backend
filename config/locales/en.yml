@@ -4,11 +4,11 @@
 #
 # To use the locales, use `I18n.t`:
 #
-#     I18n.t 'hello'
+#     I18n.t "hello"
 #
 # In views, this is aliased to just `t`:
 #
-#     <%= t('hello') %>
+#     <%= t("hello") %>
 #
 # To use a different locale, set it with `I18n.locale`:
 #
@@ -24,20 +24,23 @@
 # Instead, surround them with single quotes.
 #
 # en:
-#   'true': 'foo'
+#   "true": "foo"
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  hello: "Hello"
+  below_code_reset_password: "Below is the code to reset your password"
+  mail: "E-mail"
+  password_generated: "Password generated"
   welcome:
-    title: "Seja bem vindo ao uButeco"
-    subject: "Seja bem vindo ao uButeco"
-    text: "Seja bem vindo ao uButeco"
+    title: "Welcome to Here Present"
+    text: "Welcome to Here Present"
   confirmations:
-    title: "Confirmação de conta"
-    instruction: "Para confirmar sua conta por favor clique no link abaixou ou copie a url abaixo e cole em seu navegador"
-    link_to_confirm: "Confirmar minha conta"
+    title: "Account confirmation"
+    instruction: "To confirm your account please click on the link below or copy the url below and paste into your browser"
+    link_to_confirm: "Account confirmation"
   email_changed:
     title: "Email changed"
     message: "Email changed"
@@ -54,12 +57,19 @@ en:
   error_adding_teacher: "Error adding teacher"
   authentication_required: "authentication is required, to authenticate go to the /auth/sign_in route"
   show_record_found: "Record found"
+  check_overlapping_call_list: "The end date must be later than the start date -> Data: Start Date: %{date_start} and End Date: %{date_end}"
+  successful_export: "Successful export"
+  invalid_week_dates: "Invalid week dates"
+  mailer:
+    subject:
+      welcome: "Welcome to Here Present"
+      password_reset_code: "Verification Code - Here Present"
   messages:
     dont_find:
-      call_list: 'Unable to find call list'
-      classroom: 'Unable to find classroom'
-      student_answer: 'Unable to find student'
-      teacher: 'Unable to find teacher'
+      call_list: "Unable to find call list"
+      classroom: "Unable to find classroom"
+      student_answer: "Unable to find student"
+      teacher: "Unable to find teacher"
   success:
     create:
       call_list: "Call list created successfully"

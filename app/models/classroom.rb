@@ -13,13 +13,26 @@ class Classroom < ApplicationRecord
   OPTIONS_SHIFT = %w[Diurnal Vespertine Nightly].freeze
   OPTIONS_WEEKDAYS = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].freeze
   validates :name, presence: true
-  validates :shift, inclusion: { in: OPTIONS_SHIFT, message: '%<value>s is not a valid shift' }, allow_blank: true
-
+  validates :shift, inclusion: { in: OPTIONS_SHIFT, message: I18n.t("invalid_shift", shift_value: '%<value>s') }, allow_blank: true
   validate :check_weekdays
+
+  before_validation :set_shift_translate
+
+  def set_shift_translate
+    return nil if OPTIONS_SHIFT.include?(self.shift)
+
+    if self.shift == I18n.t("activerecord.attributes.classroom.shifts.Diurnal")
+      self.shift = "Diurnal"
+    elsif self.shift == I18n.t("activerecord.attributes.classroom.shifts.Vespertine")
+      self.shift = "Vespertine"
+    elsif self.shift == I18n.t("activerecord.attributes.classroom.shifts.Nightly")
+      self.shift = "Nightly"
+    end
+  end
 
   def check_weekdays
     weekdays.each do |week|
-      errors.add(:weekdays, 'Datas de Semana Invalidas') unless OPTIONS_WEEKDAYS.include?(week)
+      errors.add(:weekdays, I18n.t('invalid_week_dates')) unless OPTIONS_WEEKDAYS.include?(week)
     end
   end
 
