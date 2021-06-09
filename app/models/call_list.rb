@@ -25,7 +25,7 @@ class CallList < ApplicationRecord
     if date_end.blank? || date_start.blank?
       true
     elsif date_start > date_end
-      errors.add(:date_end, I18n.t("check_overlapping_call_list", date_start: date_start, date_end: date_end))
+      errors.add(:date_end, I18n.t('check_overlapping_call_list', date_start: date_start, date_end: date_end))
     end
   end
 end
