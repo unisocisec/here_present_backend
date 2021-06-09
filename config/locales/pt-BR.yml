@@ -9,6 +9,7 @@ pt-BR:
   not_find_teacher_with_email: "Não foi possível encontrar um professor com esse email"
   successful_teacher_addition: "Adição do professor com sucesso"
   error_adding_teacher: "Erro ao adicionar o professor"
+  authentication_required: "autenticação é requerida, para autenticar vá para a rota /auth/sign_in"
   show_record_found: "Registro encontrado"
   messages:
     dont_find:

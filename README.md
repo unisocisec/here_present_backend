@@ -29,7 +29,7 @@
 + `http://localhost:3000/auth` -> api auth endpoint
 
 ### Documentation
-https://documenter.getpostman.com/view/10306115/TzY4ea5F
++ [Documentação da API no POSTMAN](https://documenter.getpostman.com/view/10306115/TzY4ea5F)
 
 ### Default users in db:populate
 

@@ -41,6 +41,7 @@ en:
   not_find_teacher_with_email: "We couldn't find a teacher with this email"
   successful_teacher_addition: "Successful teacher addition"
   error_adding_teacher: "Error adding teacher"
+  authentication_required: "authentication is required, to authenticate go to the /auth/sign_in route"
   show_record_found: "Record found"
   messages:
     dont_find:
