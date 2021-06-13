@@ -60,7 +60,6 @@ namespace :db do
   desc 'Erase and Fill database to develop environment'
   task populate_start: :environment do
     Faker::Config.locale = 'pt-BR'
-    return 'Only in development environment !' unless Rails.env.development?
 
     puts 'Create Teachers, Classrooms, CallLists, StudentAnswers'
     teacher = find_or_create_teacher
