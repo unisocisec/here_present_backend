@@ -41,7 +41,7 @@ module Api
 
       def call_list_teachers
         @teachers = @call_list.teachers
-        paginate json: { teachers: @teachers }, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: @teachers, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def call_list_classroom
@@ -51,7 +51,7 @@ module Api
 
       def call_list_student_answers
         @student_answers = @call_list.student_answers
-        paginate json: { student_answers: @student_answers }, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: @student_answers, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def export_teachers_in_call_list

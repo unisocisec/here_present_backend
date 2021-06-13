@@ -2,6 +2,8 @@
 
 module Api
   class ResetPasswordsController < ApplicationController
+    skip_before_action :authenticate_teacher!, only: [:update]
+
     def update
       if current_teacher.update(reset_params)
         render json: { current_teacher: current_teacher }, status: :ok

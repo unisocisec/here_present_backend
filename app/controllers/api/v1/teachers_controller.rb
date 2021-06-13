@@ -46,17 +46,17 @@ module Api
 
       def teacher_classrooms
         @classrooms = @teacher.classrooms
-        paginate json: { classrooms: @classrooms }, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: @classrooms, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def teacher_call_lists
         @call_lists = @teacher.call_lists
-        paginate json: { call_lists: @call_lists }, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: @call_lists, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def teacher_student_answers
         @student_answers = @teacher.student_answers
-        paginate json: { student_answers: @student_answers }, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: @student_answers, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def export_classrooms_in_teacher

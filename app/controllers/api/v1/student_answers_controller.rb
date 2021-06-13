@@ -8,7 +8,7 @@ module Api
 
       def index
         @student_answers = StudentAnswer.joins(:teachers).where(teachers: { id: current_teacher.id })
-        paginate json: { student_answers: @student_answers }, status: :ok
+        paginate json: @student_answers, status: :ok
       end
 
       def show
@@ -42,7 +42,7 @@ module Api
 
       def student_answer_teachers
         @teachers = @student_answer.teachers
-        paginate json: { teachers: @teachers }, per_page: PAGINATE_PER_PAGE, status: :ok
+        paginate json: @teachers, per_page: PAGINATE_PER_PAGE, status: :ok
       end
 
       def student_answer_classroom
