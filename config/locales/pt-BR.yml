@@ -2,6 +2,7 @@ pt-BR:
   hello: "Olá"
   below_code_reset_password: "Abaixo se encontra o código para resetar a sua senha"
   email: "E-mail"
+  password: "Senha"
   password_generated: "Senha gerada"
   welcome:
     title: "Seja bem vindo ao Here Present"
@@ -61,6 +62,7 @@ pt-BR:
       teacher:
         id: "Id"
         email: "E-mail"
+        password: "Senha"
         first_name: "Primeiro nome"
         last_name: "Sobrenome"
         created_at: "Data de criação"

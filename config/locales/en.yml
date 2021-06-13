@@ -33,6 +33,7 @@ en:
   hello: "Hello"
   below_code_reset_password: "Below is the code to reset your password"
   mail: "E-mail"
+  password: "Password"
   password_generated: "Password generated"
   welcome:
     title: "Welcome to Here Present"
@@ -92,6 +93,7 @@ en:
       teacher:
         id: "Id"
         email: "Email"
+        password: "Password"
         first_name: "First name"
         last_name: "Last name"
         created_at: "Created at"
