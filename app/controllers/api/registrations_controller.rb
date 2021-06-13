@@ -10,7 +10,7 @@ module Api
         sign_in @teacher
         render json: @teacher, status: :ok
       else
-        render json: @teacher.errors, status: :unprocessable_entity
+        render json: @teacher.errors.messages, status: :unprocessable_entity
       end
     end
 

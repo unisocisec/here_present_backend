@@ -22,7 +22,11 @@ module Api
         if @teacher.save
           render json: { teacher: @teacher, message: I18n.t('success.create.teacher') }, status: :created
         else
-          render json: { errors: @teacher.errors }, status: :unprocessable_entity
+          error_message = ""
+          @teacher.errors.full_messages.each do |value_error|
+            error_message += "#{value_error}. "
+          end
+          render json: { errors: @teacher.errors.messages, error_message: error_message }, status: :bad_request
         end
       end
 
@@ -30,7 +34,11 @@ module Api
         if @teacher.update(update_params)
           render json: { teacher: @teacher }, status: :ok
         else
-          render json: { errors: @teacher.errors }, status: :unprocessable_entity
+          error_message = ""
+          @teacher.errors.full_messages.each do |value_error|
+            error_message += "#{value_error}. "
+          end
+          render json: { errors: @teacher.errors.messages, error_message: error_message }, status: :bad_request
         end
       end
 
@@ -46,7 +54,10 @@ module Api
 
       def teacher_classrooms
         @classrooms = @teacher.classrooms
-        paginate json: @classrooms, per_page: PAGINATE_PER_PAGE, status: :ok
+        @classrooms.map do |classroom|
+          classroom.student_count = classroom.student_answers.count
+        end
+        render json: @classrooms, methods: [:student_count], status: :ok
       end
 
       def teacher_call_lists

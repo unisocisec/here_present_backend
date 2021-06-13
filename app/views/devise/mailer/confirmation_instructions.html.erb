@@ -4,4 +4,4 @@
 
 <p><%= "#{ENV["CONFIRM_URL"]}?confirmation_token=#{@token}" %></p>
 
-<p><%= link_to I18n.t('confirmations.link_to_confirm'), "#{ENV["CONFIRM_URL"]}?confirmation_token=#{@token}" %></p>
+<p><%= link_to(I18n.t('confirmations.link_to_confirm'), "#{ENV["CONFIRM_URL"]}?confirmation_token=#{@token}") %></p>

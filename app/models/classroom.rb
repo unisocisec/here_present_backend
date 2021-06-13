@@ -16,6 +16,8 @@ class Classroom < ApplicationRecord
   validates :shift, inclusion: { in: OPTIONS_SHIFT, message: I18n.t('invalid_shift', shift_value: '%<value>s') }, allow_blank: true
   validate :check_weekdays
 
+  attr_accessor :student_count
+
   before_validation :set_shift_translate
 
   def set_shift_translate

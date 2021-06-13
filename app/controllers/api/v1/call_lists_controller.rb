@@ -19,7 +19,11 @@ module Api
         if @call_list.save
           render json: { call_list: @call_list, message: I18n.t('success.create.call_list') }, status: :created
         else
-          render json: { errors: @call_list.errors }, status: :unprocessable_entity
+          error_message = ""
+          @call_list.errors.full_messages.each do |value_error|
+            error_message += "#{value_error}. "
+          end
+          render json: { errors: @call_list.messages, error_message: error_message }, status: :unprocessable_entity
         end
       end
 
@@ -27,7 +31,11 @@ module Api
         if @call_list.update(update_params)
           render json: { call_list: @call_list }, status: :ok
         else
-          render json: { errors: @call_list.errors }, status: :unprocessable_entity
+          error_message = ""
+          @call_list.errors.full_messages.each do |value_error|
+            error_message += "#{value_error}. "
+          end
+          render json: { errors: @call_list.errors.messages, error_message: error_message }, status: :unprocessable_entity
         end
       end
 
