@@ -20,7 +20,7 @@ module Api
       def create
         @teacher = Teacher.new(create_params)
         if @teacher.save
-          render json: { teacher: @teacher, message: I18n.t('success.create.teacher') }, status: :created
+          render json: { teacher: @teacher, message: I18n.t('record_created_successfully') }, status: :created
         else
           error_message = ""
           @teacher.errors.full_messages.each do |value_error|

@@ -77,6 +77,7 @@ module Api
           :full_name,
           :email,
           :confirmation_code,
+          :documentaion,
           :call_list_id
         )
       end
@@ -85,6 +86,7 @@ module Api
         params.permit(
           :full_name,
           :email,
+          :documentaion,
           :confirmation_code
         )
       end

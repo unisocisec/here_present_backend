@@ -32,6 +32,7 @@
 en:
   hello: "Hello"
   below_code_reset_password: "Below is the code to reset your password"
+  record_created_successfully: "Record created successfully, according to your account in the link sent by email to login"
   mail: "E-mail"
   password: "Password"
   password_generated: "Password generated"

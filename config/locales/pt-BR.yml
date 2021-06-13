@@ -1,6 +1,7 @@
 pt-BR:
   hello: "Olá"
   below_code_reset_password: "Abaixo se encontra o código para resetar a sua senha"
+  record_created_successfully: "Registro criado com sucesso, conforme a sua conta no link enviado email para efetuar login"
   email: "E-mail"
   password: "Senha"
   password_generated: "Senha gerada"
