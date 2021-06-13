@@ -58,10 +58,10 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   # Raises error for missing translations.
-  # config.i18n.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
 
   # Annotate rendered view with file names.
-  # config.action_view.annotate_rendered_view_with_filenames = true
+  config.action_view.annotate_rendered_view_with_filenames = true
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
@@ -76,4 +76,5 @@ Rails.application.configure do
     address: ENV['MAILER_ADDRESS'],
     port: ENV['MAILER_PORT']
   }
+  config.action_mailer.default(ENV['MAILER_USER_NAME'])
 end

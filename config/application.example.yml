@@ -10,6 +10,7 @@ MAILER: &mailer
   MAILER_USER_NAME:
   MAILER_PASSWORD:
   MAILER_DOMAIN:
+  MAILER_SENDER: "here.present@ekoon.com"
 
 AWS: &aws
   AWS_PROVIDER: AWS
