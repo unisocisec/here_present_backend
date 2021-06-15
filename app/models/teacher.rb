@@ -15,14 +15,14 @@ class Teacher < ApplicationRecord
   has_many :allowlisted_jwts, dependent: :delete_all
 
   devise :database_authenticatable,
-        :encryptable,
-        :registerable,
-        :recoverable,
-        :confirmable,
-        :validatable,
-        :trackable,
-        :jwt_authenticatable,
-        jwt_revocation_strategy: self
+         :encryptable,
+         :registerable,
+         :recoverable,
+         :confirmable,
+         :validatable,
+         :trackable,
+         :jwt_authenticatable,
+         jwt_revocation_strategy: self
   validates :first_name, :last_name, presence: true
 
   def full_name

@@ -22,7 +22,7 @@ module Api
         if @teacher.save
           render json: { teacher: @teacher, message: I18n.t('record_created_successfully') }, status: :created
         else
-          error_message = ""
+          error_message = ''
           @teacher.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end
@@ -34,7 +34,7 @@ module Api
         if @teacher.update(update_params)
           render json: { teacher: @teacher }, status: :ok
         else
-          error_message = ""
+          error_message = ''
           @teacher.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end

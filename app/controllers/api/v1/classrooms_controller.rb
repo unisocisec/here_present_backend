@@ -20,7 +20,7 @@ module Api
           TeacherClassroom.create(teacher_id: current_teacher.id, classroom_id: @classroom.id)
           render json: { classroom: @classroom, message: I18n.t('success.create.classroom') }, status: :created
         else
-          error_message = ""
+          error_message = ''
           @classroom.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end
@@ -32,7 +32,7 @@ module Api
         if @classroom.update(update_params)
           render json: { classroom: @classroom }, status: :ok
         else
-          error_message = ""
+          error_message = ''
           @classroom.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end

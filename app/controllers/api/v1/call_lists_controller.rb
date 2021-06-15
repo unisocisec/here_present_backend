@@ -19,7 +19,7 @@ module Api
         if @call_list.save
           render json: { call_list: @call_list, message: I18n.t('success.create.call_list') }, status: :created
         else
-          error_message = ""
+          error_message = ''
           @call_list.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end
@@ -31,7 +31,7 @@ module Api
         if @call_list.update(update_params)
           render json: { call_list: @call_list }, status: :ok
         else
-          error_message = ""
+          error_message = ''
           @call_list.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end

@@ -33,9 +33,9 @@ gem 'pg'
 gem 'puma'
 gem 'rack-attack'
 gem 'rack-cors'
+gem 'rails-i18n'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'will_paginate'
-gem 'rails-i18n'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

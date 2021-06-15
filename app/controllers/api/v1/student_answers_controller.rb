@@ -20,7 +20,7 @@ module Api
         if @student_answer.save
           render json: { student_answer: @student_answer, message: I18n.t('success.create.student_answer') }, status: :created
         else
-          error_message = ""
+          error_message = ''
           @call_list.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end
@@ -32,7 +32,7 @@ module Api
         if @student_answer.update(update_params)
           render json: { student_answer: @student_answer }, status: :ok
         else
-          error_message = ""
+          error_message = ''
           @call_list.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end

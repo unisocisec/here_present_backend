@@ -40,6 +40,7 @@ def find_or_create_student_answer(call_list_id:, number:)
     full_name: Faker::Games::WorldOfWarcraft.hero,
     email: Faker::Internet.unique.email,
     call_list_id: call_list_id,
+    documentation: Faker::Code.nric,
     confirmation_code: @confirmation_code
   ).first_or_create
 end
