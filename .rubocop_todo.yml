@@ -9,10 +9,6 @@
 # Offense count: 2
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 
-AllCops:
-  Excludes:
-    - db/schema.rb
-
 Metrics/AbcSize:
   Max: 26
 
