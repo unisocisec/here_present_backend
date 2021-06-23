@@ -20,7 +20,7 @@ class CallList < ApplicationRecord
   end
 
   def token_encode
-    JWT.encode({call_list_id: self.id}, ENV["CALL_LIST_SECRET"], "HS256")
+    JWT.encode({ call_list_id: id }, ENV['CALL_LIST_SECRET'], 'HS256')
   end
 
   private
