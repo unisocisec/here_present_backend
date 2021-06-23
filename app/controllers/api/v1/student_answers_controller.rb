@@ -73,6 +73,8 @@ module Api
       end
 
       def create_params
+        token_decode = JWT.decode(params[:call_list_id], ENV["CALL_LIST_SECRET"])
+        params[:call_list_id], params[:student_answer][:call_list_id] = token_decode.first["call_list_id"]
         params.permit(
           :full_name,
           :email,
@@ -80,6 +82,8 @@ module Api
           :documentation,
           :call_list_id
         )
+      rescue JWT::DecodeError => e
+        puts e.message
       end
 
       def update_params

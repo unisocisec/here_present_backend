@@ -19,6 +19,10 @@ class CallList < ApplicationRecord
     attributes
   end
 
+  def token_encode
+    JWT.encode({call_list_id: self.id}, ENV["CALL_LIST_SECRET"], "HS256")
+  end
+
   private
 
   def check_overlapping
