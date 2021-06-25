@@ -11,7 +11,7 @@ module Api
       end
 
       def show
-        render json: { call_list: @call_list, message: I18n.t('show_record_found') }, status: :ok
+        render json: { call_list: @call_list, token_call_list: @call_list.token_encode, message: I18n.t('show_record_found') }, status: :ok
       end
 
       def create

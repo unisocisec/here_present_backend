@@ -104,7 +104,7 @@ en:
         name: "Name"
         school: "School/University"
         weekdays: "Weekdays"
-        weekday:
+        weekdays:
           Monday: "Monday"
           Tuesday: "Tuesday"
           Wednesday: "Wednesday"
