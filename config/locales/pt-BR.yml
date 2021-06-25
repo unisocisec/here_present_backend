@@ -73,7 +73,7 @@ pt-BR:
         name: "Nome"
         school: "Escola/Universidade"
         weekdays: "Dias da semana"
-        weekday:
+        weekdays:
           Monday: "Segunda-feira"
           Tuesday: "Terça-feira"
           Wednesday: "Quarta-feira"

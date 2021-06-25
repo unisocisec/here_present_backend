@@ -56,6 +56,6 @@ class Classroom < ApplicationRecord
   end
 
   def weekdays_translate
-    self.weekdays = weekdays.map { |weekday| Classroom.human_enum_name(:weekday, weekday) }
+    self.weekdays = weekdays.map { |weekday| Classroom.human_enum_name(:weekdays, weekday) }
   end
 end
