@@ -3,7 +3,8 @@
 module Api
   module V1
     class CallListsController < ApplicationController
-      before_action :search_call_list_for_id, except: %w[index create]
+      skip_before_action :authenticate_teacher!, only: [:get_classroom_name]
+      before_action :search_call_list_for_id, except: %w[index create get_classroom_name]
 
       def index
         @call_lists = CallList.joins(:teachers).where(teachers: { id: current_teacher.id })
@@ -44,6 +45,15 @@ module Api
           render json: { message: I18n.t('success.destroy.call_list') }, status: :ok
         else
           render json: { message: I18n.t('error.destroy.call_list') }, status: :bad_request
+        end
+      end
+
+      def get_classroom_name
+        @call_list = CallList.get_call_list_through_token(token_call_list_id: params[:token_call_list_id])
+        if @call_list.present?
+          render json: { classroom_name: @call_list.classroom.name }, status: :ok
+        else
+          render json: { classroom_name: I18n.t('messages.dont_find.classroom') }, status: :bad_request
         end
       end
 

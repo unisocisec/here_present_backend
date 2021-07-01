@@ -23,6 +23,11 @@ class CallList < ApplicationRecord
     JWT.encode({ call_list_id: id }, ENV['CALL_LIST_SECRET'], 'HS256')
   end
 
+  def self.get_call_list_through_token(token_call_list_id:)
+    token_decode = JWT.decode(token_call_list_id, ENV['CALL_LIST_SECRET'])
+    CallList.find_by_id(token_decode.first['call_list_id'])
+  end
+
   private
 
   def check_overlapping

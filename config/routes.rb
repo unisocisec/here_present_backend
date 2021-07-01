@@ -39,6 +39,9 @@ Rails.application.routes.draw do
         get :export_student_answers_in_classroom, on: :member
       end
       resources :call_lists do
+        collection do
+          get :get_classroom_name
+        end
         get :call_list_teachers, on: :member
         get :call_list_classroom, on: :member
         get :call_list_student_answers, on: :member
