@@ -54,7 +54,8 @@ RUN gem install bundler
 # RAILS
 RUN sudo gem update --system \
   && gem install bundler \
-  && gem install rails
+  && gem install rails \
+  && gem install rubocop
 
 # Expose ports.
 EXPOSE 3000
