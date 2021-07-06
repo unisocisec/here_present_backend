@@ -9,6 +9,7 @@ class StudentAnswer < ApplicationRecord
   has_many :teachers, through: :teacher_classrooms
 
   validates :full_name, :email, :call_list_id, presence: true
+  validates :email, uniqueness: { scope: :call_list_id } 
 
   after_update :set_edited, if: :was_not_edited?
   after_save :set_answer_correct
