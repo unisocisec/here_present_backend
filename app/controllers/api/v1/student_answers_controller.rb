@@ -21,7 +21,7 @@ module Api
           render json: { student_answer: @student_answer, message: I18n.t('success.create.student_answer') }, status: :created
         else
           error_message = ''
-          @call_list.errors.full_messages.each do |value_error|
+          @student_answer.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end
           render json: { errors: @student_answer.errors.messages, error_message: error_message }, status: :unprocessable_entity
@@ -33,7 +33,7 @@ module Api
           render json: { student_answer: @student_answer }, status: :ok
         else
           error_message = ''
-          @call_list.errors.full_messages.each do |value_error|
+          @student_answer.errors.full_messages.each do |value_error|
             error_message += "#{value_error}. "
           end
           render json: { errors: @student_answer.errors.messages, error_message: error_message }, status: :unprocessable_entity

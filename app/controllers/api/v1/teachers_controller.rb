@@ -56,6 +56,7 @@ module Api
         @classrooms = @teacher.classrooms
         @classrooms.map do |classroom|
           classroom.student_count = classroom.student_answers.count
+          classroom.shift = I18n.t("activerecord.attributes.classroom.shifts.#{classroom.shift}")
         end
         render json: @classrooms, methods: [:student_count], status: :ok
       end
